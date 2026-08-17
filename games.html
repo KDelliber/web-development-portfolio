@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Games - Breakout and Tetris">
+    <meta name="keywords" content="Games, Breakout, Tetris, Portfolio">
+    <meta name="author" content="Kenneth Delliber">
+    <title>Games</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <div class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="about_me.html">About Me</a>
+        <a href="certifications.html">Certifications</a>
+        <div class="dropdown">
+            <button class="dropbtn">Projects</button>
+            <div class="dropdown-content">
+                <a href="capstone_project.html">Capstone Project</a>
+                <a href="home_network.html">Home Network Setup</a>
+                <a href="alienware_upgrade.html">Alienware Upgrade</a>
+                <a href="pc-build-report.html">PC Build Report</a>
+                <a href="games.html">Games</a>
+            </div>
+        </div>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Game Menu</h3>
+        <ul>
+            <li><a href="#breakout-container">Breakout Game</a></li>
+            <li><a href="#tetris-container">Tetris Game</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Header for the Games Page -->
+            <section class="game-header">
+                <h1>Games</h1>
+                <p>Explore the exciting world of games I have created: Breakout and Tetris!</p>
+            </section>
+
+            <!-- Breakout Game Container -->
+            <section id="breakout-container" class="game-container">
+                <h2>Breakout Game</h2>
+                <p>
+                    This is my custom Breakout game, designed to challenge your reflexes and strategic thinking. 
+                    Click the button below to start playing!
+                </p>
+                <button onclick="location.href='breakout.html'" class="button">Play Breakout</button>
+            </section>
+
+            <!-- Tetris Game Container -->
+            <section id="tetris-container" class="game-container">
+                <h2>Tetris Game</h2>
+                <p>
+                    Experience my version of the classic Tetris game, complete with modern enhancements and 
+                    customizable features. Click the button below to play!
+                </p>
+                <button onclick="location.href='Tetris Clone/index.html'" class="button">Play Tetris</button>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Kenneth Delliber. All rights reserved.</p>
+        <p><a href="contact.html" style="color: #ffd700; text-decoration: none;">Contact Me</a></p>
+        <button id="backToTopBtn">Back to Top</button>
+    </footer>
+
+    <script src="modal.js"></script>
+    <script src="backToTop.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Certifications earned by Kenneth Delliber.">
+    <meta name="keywords" content="Kenneth Delliber, certifications, IT, A+, Net+, TestOut, YTI Career Institute">
+    <title>Certifications</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <div class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="about_me.html">About Me</a>
+        <a href="certifications.html">Certifications</a>
+        <div class="dropdown">
+            <button class="dropbtn">Projects</button>
+            <div class="dropdown-content">
+                <a href="capstone_project.html">Capstone Project</a>
+                <a href="home_network.html">Home Network Setup</a>
+                <a href="alienware_upgrade.html">Alienware Upgrade</a>
+                <a href="pc-build-report.html">PC Build Report</a>
+                <a href="games.html">Games</a>
+            </div>
+        </div>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="sidebar">
+        <h3>Certifications</h3>
+        <ul>
+            <li><a href="#associates-degree">Associate’s Degree</a></li>
+            <li><a href="#security-pro">TestOut Security Pro</a></li>
+            <li><a href="#linux-pro">TestOut Linux Pro</a></li>
+            <li><a href="#network-plus">CompTIA Network+</a></li>
+            <li><a href="#network-pro">TestOut Network Pro</a></li>
+            <li><a href="#a-plus">CompTIA A+</a></li>
+            <li><a href="#pc-pro">TestOut PC Pro</a></li>
+            <li><a href="#porter-chester">Comp. Network Tech (Porter & Chester)</a></li>
+            <li><a href="#office-pro">TestOut Office Pro</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <div class="container">
+            <section id="associates-degree" class="section">
+                <h2>Associate Degree in Specialized Technology</h2>
+                <img
+                    src="Certs/associates.jpg"
+                    alt="Associate Degree from YTI Career Institute"
+                    class="zoom-img small-img"
+                >
+                <p>
+                    Computer and Data Management curriculum from YTI Career Institute
+                    (Graduated with a 4.0 GPA).
+                </p>
+            </section>
+
+            <section id="security-pro" class="section">
+                <h2>TestOut Security Pro</h2>
+                <img
+                    src="Certs/securitypro.jpg"
+                    alt="TestOut Security Pro Certification"
+                    class="zoom-img small-img"
+                >
+                <p>Validates knowledge of cybersecurity principles and best practices.</p>
+            </section>
+
+            <section id="linux-pro" class="section">
+                <h2>TestOut Linux Pro</h2>
+                <img
+                    src="Certs/linuxpro.jpg"
+                    alt="TestOut Linux Pro Certification"
+                    class="zoom-img small-img"
+                >
+                <p>Hands-on certification covering Linux installation, management, and configuration.</p>
+            </section>
+
+            <section id="network-plus" class="section">
+                <h2>CompTIA Network+</h2>
+                <img
+                    src="Certs/Net+.jpg"
+                    alt="CompTIA Network+ Certification"
+                    class="zoom-img small-img"
+                >
+                <p>Validates essential networking concepts like configuration, management, and troubleshooting.</p>
+            </section>
+
+            <section id="network-pro" class="section">
+                <h2>TestOut Network Pro</h2>
+                <img
+                    src="Certs/networkpro.jpg"
+                    alt="TestOut Network Pro Certification"
+                    class="zoom-img small-img"
+                >
+                <p>Practical network skills including routing, switching, and network security.</p>
+            </section>
+
+            <section id="a-plus" class="section">
+                <h2>CompTIA A+</h2>
+                <img
+                    src="Certs/A+.jpg"
+                    alt="CompTIA A+ Certification"
+                    class="zoom-img small-img"
+                >
+                <p>Core certification demonstrating foundational IT knowledge and skills.</p>
+            </section>
+
+            <section id="pc-pro" class="section">
+                <h2>TestOut PC Pro</h2>
+                <img
+                    src="Certs/pcpro.jpg"
+                    alt="TestOut PC Pro Certification"
+                    class="zoom-img small-img"
+                >
+                <p>PC hardware, software, and troubleshooting fundamentals.</p>
+            </section>
+
+            <section id="porter-chester" class="section">
+                <h2>Computer Network Technologies Certificate</h2>
+                <img
+                    src="Certs/pcicert.jpg"
+                    alt="Computer Network Technologies Certificate"
+                    class="zoom-img small-img"
+                >
+                <p>Focused training in computer networking and system maintenance.</p>
+            </section>
+
+            <section id="office-pro" class="section">
+                <h2>TestOut Office Pro</h2>
+                <img
+                    src="Certs/officepro.jpg"
+                    alt="TestOut Office Pro Certification"
+                    class="zoom-img small-img"
+                >
+                <p>Demonstrates proficiency in Microsoft Office productivity tools.</p>
+            </section>
+					<div style="height: 40px;"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Kenneth Delliber. All rights reserved.</p>
+        <p><a href="contact.html" style="color: #ffd700; text-decoration: none;">Contact Me</a></p>
+        <button id="backToTopBtn">Back to Top</button>
+    </footer>
+
+    <!-- Modal for Zoom Functionality -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="imgModal">
+        <div id="caption"></div>
+    </div>
+
+    <script src="modal.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.zoom-img');
+            const modal = document.getElementById('myModal');
+            const modalImg = document.getElementById('imgModal');
+            const captionText = document.getElementById('caption');
+            const close = document.querySelector('.close');
+
+            images.forEach(img => {
+                img.addEventListener('click', () => {
+                    modal.style.display = 'block';
+                    modalImg.src = img.src;
+                    captionText.textContent = img.alt;
+                });
+            });
+
+            close.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+        });
+    </script>
+<script src="backToTop.js"></script>
+
+
+</body>
+</html>

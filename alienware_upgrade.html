@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kenneth Delliber's Alienware upgrade and rebuild documentation.">
+    <meta name="keywords" content="Kenneth Delliber, IT portfolio, Alienware upgrade, PC rebuild, hardware maintenance">
+    <meta name="author" content="Kenneth Delliber">
+    <title>Alienware Upgrade</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <div class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="about_me.html">About Me</a>
+        <a href="certifications.html">Certifications</a>
+        <div class="dropdown">
+            <button class="dropbtn">Projects</button>
+            <div class="dropdown-content">
+                <a href="capstone_project.html">Capstone Project</a>
+                <a href="home_network.html">Home Network Setup</a>
+                <a href="alienware_upgrade.html">Alienware Upgrade</a>
+                <a href="pc-build-report.html">PC Build Report</a>
+                <a href="games.html">Games</a>
+            </div>
+        </div>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Sections</h3>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#initial-issues">Initial Issues</a></li>
+            <li><a href="#key-upgrades">Key Upgrades</a></li>
+            <li><a href="#tools">Tools and Preparation</a></li>
+            <li><a href="#results">Results and Insights</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <div class="container">
+            <section id="overview" class="section">
+                <h2>Alienware Upgrade and Rebuild</h2>
+                <p>
+                    This project documents the upgrade and rebuild of my Alienware Aurora R7. The goal was to address thermal and design limitations while enhancing the system's usability and reliability.
+                </p>
+            </section>
+
+            <section id="initial-issues" class="section">
+                <h2>Initial Issues</h2>
+                <ul class="issues-list">
+                    <li>Poor airflow in the Alienware Aurora R7 case, leading to high CPU and GPU temperatures.</li>
+                    <li>Compact design made maintenance and upgrades challenging.</li>
+                    <li>Power supply failure necessitated replacement.</li>
+                    <li>Non-standard Dell DVD drive power connector required an adapter.</li>
+                </ul>
+            </section>
+
+            <section id="key-upgrades" class="section">
+                <h2>Key Upgrades</h2>
+                <ul class="upgrades-list">
+                    <li>Case: Corsair 4000D Airflow ATX Mid Tower Case</li>
+                    <li>Motherboard: Gigabyte Z390 AORUS PRO WIFI ATX</li>
+                    <li>Power Supply: Corsair RM850 850W 80+ Gold Certified Fully Modular</li>
+                    <li>Cooling System: Switched to Noctua NF-A8 PWM Premium Quiet Fan with OEM heat sink</li>
+                </ul>
+            </section>
+
+            <section id="tools" class="section">
+                <h2>Tools and Preparation</h2>
+                <ul class="tools-list">
+                    <li>iFixit Toolset (including wrist strap for static safety)</li>
+                    <li>Compressed Air Duster (45000 RPM Cordless)</li>
+                    <li>PCPartPicker for compatibility and power calculations</li>
+                    <li>Computer PC Power Supply Tester (1.8" LCD screen)</li>
+                </ul>
+            </section>
+
+            <section id="results" class="section">
+                <h2>Results and Insights</h2>
+                <p>
+                    The rebuild resolved thermal issues and improved system stability. CPU temperatures dropped significantly with the Noctua fan, and cable management was vastly simplified thanks to the Corsair case. Lessons learned include the value of a well-designed case and the challenges of working with prebuilt systems.
+                </p>
+            </section>
+
+            <section id="download-report" class="section">
+                <h2>Download Full Report</h2>
+                <p>Click the button below to download the detailed documentation of this project:</p>
+                <button onclick="location.href='alienware_upgrade/PC_Upgrade_and_Rebuild_Report.docx'" class="button">Download Full Report</button>
+            </section>
+
+            <!-- Spacer for Back to Top Button -->
+            <div style="height: 40px;"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Kenneth Delliber. All rights reserved.</p>
+        <p><a href="contact.html" style="color: #ffd700; text-decoration: none;">Contact Me</a></p>
+        <button id="backToTopBtn">Back to Top</button>
+    </footer>
+
+    <script src="modal.js"></script>
+    <script src="backToTop.js"></script>
+</body>
+</html>

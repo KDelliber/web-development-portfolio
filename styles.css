@@ -523,3 +523,36 @@ footer {
         width: 100%;
     }
 }
+
+
+/* Certification card layout */
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+}
+
+.cert-grid .section {
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.cert-grid .zoom-img {
+    display: block;
+    width: auto;
+    max-width: min(100%, 320px);
+    height: 220px;
+    object-fit: contain;
+    margin: 0 auto 16px;
+}
+
+@media (max-width: 900px) {
+    .cert-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cert-grid .zoom-img {
+        height: 190px;
+    }
+}

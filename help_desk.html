@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kenneth Delliber's IT help desk simulation covering Windows performance troubleshooting, customer support, and ticket documentation.">
+    <meta name="keywords" content="Kenneth Delliber, IT Help Desk, Windows Troubleshooting, Task Manager, Windows Update, Ticket Documentation">
+    <meta name="author" content="Kenneth Delliber">
+    <title>IT Help Desk Simulation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <div class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="about_me.html">About Me</a>
+        <a href="certifications.html">Certifications</a>
+        <div class="dropdown">
+            <button class="dropbtn">Projects</button>
+            <div class="dropdown-content">
+                <a href="capstone_project.html">Capstone Project</a>
+                <a href="home_network.html">Home Network Setup</a>
+                <a href="help_desk.html">IT Help Desk Simulation</a>
+                <a href="alienware_upgrade.html">Alienware Upgrade</a>
+                <a href="pc-build-report.html">PC Build Report</a>
+                <a href="games.html">Games</a>
+            </div>
+        </div>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Sections</h3>
+        <ul>
+            <li><a href="#overview">Project Overview</a></li>
+            <li><a href="#reported-issue">Reported Issue</a></li>
+            <li><a href="#troubleshooting">Troubleshooting Process</a></li>
+            <li><a href="#customer-support">Customer Communication</a></li>
+            <li><a href="#resolution">Resolution</a></li>
+            <li><a href="#ticket-documentation">Ticket Documentation</a></li>
+            <li><a href="#skills">Skills Demonstrated</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <div class="container">
+            <section id="overview" class="section">
+                <h2>IT Help Desk Lab and Simulation</h2>
+                <p>
+                    This simulated support case demonstrates an end-to-end help desk workflow for a Windows computer experiencing poor performance. I gathered information from the user, reviewed system activity, identified Windows Update as the likely cause, guided the user through the resolution, confirmed the result, and documented the completed ticket.
+                </p>
+            </section>
+
+            <section id="reported-issue" class="section">
+                <h2>Reported Issue</h2>
+                <p>
+                    The user reported that their Windows computer had become unusually slow and difficult to use. The support goal was to identify the source of the performance problem while keeping the user informed and avoiding unnecessary changes to the system.
+                </p>
+            </section>
+
+            <section id="troubleshooting" class="section">
+                <h2>Troubleshooting Process</h2>
+                <ol>
+                    <li><strong>Clarified the symptoms:</strong> Asked when the slowdown began, what applications were affected, and whether any recent changes had occurred.</li>
+                    <li><strong>Reviewed system performance:</strong> Guided the user to open Task Manager and inspect CPU, memory, disk, and active processes.</li>
+                    <li><strong>Analyzed running processes:</strong> Used the process activity to narrow the issue to Windows maintenance and update services rather than an unknown application.</li>
+                    <li><strong>Checked Windows Update:</strong> Opened Windows Update settings and confirmed that updates were pending and required a restart to finish.</li>
+                </ol>
+            </section>
+
+            <section id="customer-support" class="section">
+                <h2>Customer Communication</h2>
+                <p>
+                    I explained each step in plain language, told the user why Task Manager and Windows Update were being checked, and set expectations before the restart. I remained available throughout the process so the user knew what was happening and could confirm when the computer returned to normal operation.
+                </p>
+            </section>
+
+            <section id="resolution" class="section">
+                <h2>Resolution</h2>
+                <p>
+                    The user saved their work and restarted the computer so Windows could complete the pending updates. After the restart, we verified that update processing had finished and that system performance had improved. No additional software removal or hardware changes were required.
+                </p>
+            </section>
+
+            <section id="ticket-documentation" class="section">
+                <h2>Ticket Documentation</h2>
+                <p>
+                    The support ticket recorded the user's reported symptoms, Task Manager observations, Windows Update status, troubleshooting steps, restart authorization, final verification, and resolution. Clear documentation created a useful service history and made the case easy for another technician to review.
+                </p>
+                <ul>
+                    <li><strong>Issue:</strong> Windows computer running slowly.</li>
+                    <li><strong>Diagnosis:</strong> Resource use associated with pending Windows updates.</li>
+                    <li><strong>Action:</strong> Reviewed Task Manager, checked Windows Update, and guided the user through a safe restart.</li>
+                    <li><strong>Result:</strong> Updates completed and normal performance was restored.</li>
+                    <li><strong>Status:</strong> Resolved and documented.</li>
+                </ul>
+            </section>
+
+            <section id="skills" class="section">
+                <h2>Skills Demonstrated</h2>
+                <ul>
+                    <li>Windows performance troubleshooting</li>
+                    <li>Task Manager process and resource review</li>
+                    <li>Windows Update diagnosis</li>
+                    <li>Clear, patient customer communication</li>
+                    <li>Guided restart and post-resolution verification</li>
+                    <li>Help desk ticket documentation</li>
+                </ul>
+            </section>
+
+            <div style="height: 40px;"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Kenneth Delliber. All rights reserved.</p>
+        <p><a href="contact.html" style="color: #ffd700; text-decoration: none;">Contact Me</a></p>
+        <button id="backToTopBtn">Back to Top</button>
+    </footer>
+
+    <script src="modal.js"></script>
+    <script src="backToTop.js"></script>
+</body>
+</html>

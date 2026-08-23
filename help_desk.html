@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kenneth Delliber's IT help desk simulation covering Windows performance troubleshooting, customer support, and ticket documentation.">
-    <meta name="keywords" content="Kenneth Delliber, IT Help Desk, Windows Troubleshooting, Task Manager, Windows Update, Ticket Documentation">
+    <meta name="description" content="Kenneth Delliber's IT help desk simulation covering mapped network drive troubleshooting, customer support, and ticket documentation.">
+    <meta name="keywords" content="Kenneth Delliber, IT Help Desk, Network Drive Troubleshooting, Windows, net use, Ticket Documentation">
     <meta name="author" content="Kenneth Delliber">
     <title>IT Help Desk Simulation</title>
     <link rel="stylesheet" href="styles.css">
@@ -51,7 +51,7 @@
             <section id="overview" class="section">
                 <h2>IT Help Desk Lab and Simulation</h2>
                 <p>
-                    This help desk portfolio summarizes my troubleshooting process and links to the central ticketing system used for lab documentation. The featured case below demonstrates an end-to-end support workflow for a Windows computer experiencing poor performance without turning every ticket into a separate portfolio project.
+                    This help desk portfolio summarizes my troubleshooting process and links to the central ticketing system used for lab documentation. The featured case below demonstrates an end-to-end support workflow for a user who could not access a mapped shared drive, without turning every ticket into a separate portfolio project.
                 </p>
             </section>
 
@@ -64,46 +64,46 @@
             </section>
 
             <section id="reported-issue" class="section">
-                <h2>Featured Ticket: Windows Performance Issue</h2>
+                <h2>Featured Ticket: HD-0006 — Unable to Access S: Shared Drive</h2>
                 <p>
-                    The user reported that their Windows computer had become unusually slow and difficult to use. The support goal was to identify the source of the performance problem while keeping the user informed and avoiding unnecessary changes to the system.
+                    The user reported that they could not access the mapped S: shared drive. The support goal was to identify the failed mapping, restore access to the Operations share, and avoid disrupting any other mapped network drives.
                 </p>
             </section>
 
             <section id="troubleshooting" class="section">
                 <h2>Troubleshooting Process</h2>
                 <ol>
-                    <li><strong>Clarified the symptoms:</strong> Asked when the slowdown began, what applications were affected, and whether any recent changes had occurred.</li>
-                    <li><strong>Reviewed system performance:</strong> Guided the user to open Task Manager and inspect CPU, memory, disk, and active processes.</li>
-                    <li><strong>Analyzed running processes:</strong> Used the process activity to narrow the issue to Windows maintenance and update services rather than an unknown application.</li>
-                    <li><strong>Checked Windows Update:</strong> Opened Windows Update settings and confirmed that updates were pending and required a restart to finish.</li>
+                    <li><strong>Inspected mapped drives:</strong> Used <code>net use</code> to review the user's existing network drive mappings and their connection status.</li>
+                    <li><strong>Identified the failed mapping:</strong> Found that the S: drive mapping was stale and unavailable.</li>
+                    <li><strong>Removed only the affected mapping:</strong> Ran <code>net use S: /delete</code> so the repair would not disrupt the user's other mapped drives.</li>
+                    <li><strong>Restored the drive:</strong> Remapped <code>S:</code> to <code>\\FILESERVER01\Operations</code>.</li>
                 </ol>
             </section>
 
             <section id="customer-support" class="section">
                 <h2>Customer Communication</h2>
                 <p>
-                    I explained each step in plain language, told the user why Task Manager and Windows Update were being checked, and set expectations before the restart. I remained available throughout the process so the user knew what was happening and could confirm when the computer returned to normal operation.
+                    I explained that the existing S: mapping was no longer available and that I would remove and recreate only that drive connection. After remapping it, I asked the user to browse the share and open files to confirm that access was fully restored.
                 </p>
             </section>
 
             <section id="resolution" class="section">
                 <h2>Resolution</h2>
                 <p>
-                    The user saved their work and restarted the computer so Windows could complete the pending updates. After the restart, we verified that update processing had finished and that system performance had improved. No additional software removal or hardware changes were required.
+                    The stale S: mapping was removed with <code>net use S: /delete</code>, then <code>S:</code> was remapped to <code>\\FILESERVER01\Operations</code>. The user verified that they could browse the shared drive and open files successfully.
                 </p>
             </section>
 
             <section id="ticket-documentation" class="section">
                 <h2>Ticket Documentation</h2>
                 <p>
-                    The support ticket recorded the user's reported symptoms, Task Manager observations, Windows Update status, troubleshooting steps, restart authorization, final verification, and resolution. Clear documentation created a useful service history and made the case easy for another technician to review.
+                    The support ticket recorded the inaccessible S: drive, the stale mapping found with <code>net use</code>, the targeted deletion and remapping commands, and the user's successful access test. Clear documentation created a useful service history and made the case easy for another technician to review.
                 </p>
                 <ul>
-                    <li><strong>Issue:</strong> Windows computer running slowly.</li>
-                    <li><strong>Diagnosis:</strong> Resource use associated with pending Windows updates.</li>
-                    <li><strong>Action:</strong> Reviewed Task Manager, checked Windows Update, and guided the user through a safe restart.</li>
-                    <li><strong>Result:</strong> Updates completed and normal performance was restored.</li>
+                    <li><strong>Issue:</strong> Unable to access the S: shared drive.</li>
+                    <li><strong>Diagnosis:</strong> Stale and unavailable S: drive mapping.</li>
+                    <li><strong>Action:</strong> Inspected mappings with <code>net use</code>, removed only S: with <code>net use S: /delete</code>, and remapped it to <code>\\FILESERVER01\Operations</code>.</li>
+                    <li><strong>Result:</strong> The user could browse the share and open files successfully.</li>
                     <li><strong>Status:</strong> Resolved and documented.</li>
                 </ul>
             </section>
@@ -111,11 +111,12 @@
             <section id="skills" class="section">
                 <h2>Skills Demonstrated</h2>
                 <ul>
-                    <li>Windows performance troubleshooting</li>
-                    <li>Task Manager process and resource review</li>
-                    <li>Windows Update diagnosis</li>
+                    <li>Mapped network drive troubleshooting</li>
+                    <li>Windows <code>net use</code> command</li>
+                    <li>UNC path and shared-folder mapping</li>
+                    <li>Targeted remediation that preserved other drive mappings</li>
                     <li>Clear, patient customer communication</li>
-                    <li>Guided restart and post-resolution verification</li>
+                    <li>Post-resolution access and file-open verification</li>
                     <li>Help desk ticket documentation</li>
                 </ul>
             </section>

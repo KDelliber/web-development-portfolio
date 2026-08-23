@@ -571,3 +571,13 @@ footer {
         margin-bottom: 12px;
     }
 }
+
+
+/* Use the full content width on pages with decorative sidebars */
+.has-decorative-sidebar .decorative-sidebar {
+    display: none;
+}
+
+.has-decorative-sidebar main {
+    margin-left: 0;
+}

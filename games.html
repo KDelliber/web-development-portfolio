@@ -9,9 +9,36 @@
     <title>Games</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        .games-page { max-width: 900px; }
+        .game-header { margin-bottom: 28px; }
+        .game-header h1 { margin-bottom: 8px; }
+        .game-header p { margin: 0; }
+        .game-container {
+            padding: 24px;
+            margin-bottom: 24px;
+            background: #fff;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+        }
+        .game-container h2 { margin: 0 0 10px; }
+        .game-container p { margin: 0 0 18px; }
+        .game-container .button { margin-top: 0; }
+        @media (max-width: 768px) {
+            .games-page { padding: 8px 6px 4px; }
+            .game-header { margin-bottom: 20px; }
+            .game-header h1 { font-size: 2rem; line-height: 1.2; }
+            .game-header p { line-height: 1.55; }
+            .game-container {
+                padding: 20px 18px;
+                margin-bottom: 18px;
+            }
+            .game-container h2 { font-size: 1.65rem; line-height: 1.25; margin-bottom: 8px; }
+            .game-container p { line-height: 1.6; margin-bottom: 18px; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Top Navigation -->
     <div class="top-nav">
         <a href="index.html">Home</a>
         <a href="about_me.html">About Me</a>
@@ -31,7 +58,6 @@
         <a href="contact.html">Contact</a>
     </div>
 
-    <!-- Sidebar -->
     <div class="sidebar">
         <h3>Game Menu</h3>
         <ul>
@@ -40,38 +66,27 @@
         </ul>
     </div>
 
-    <!-- Main Content -->
     <main>
-        <div class="container">
-            <!-- Header for the Games Page -->
+        <div class="container games-page">
             <section class="game-header">
                 <h1>Games</h1>
-                <p>Explore the exciting world of games I have created: Breakout and Tetris!</p>
+                <p>Explore the games I have created: Breakout and Tetris.</p>
             </section>
 
-            <!-- Breakout Game Container -->
             <section id="breakout-container" class="game-container">
                 <h2>Breakout Game</h2>
-                <p>
-                    This is my custom Breakout game, designed to challenge your reflexes and strategic thinking. 
-                    Click the button below to start playing!
-                </p>
+                <p>My custom Breakout game is designed to challenge your reflexes and timing.</p>
                 <button onclick="location.href='breakout.html'" class="button">Play Breakout</button>
             </section>
 
-            <!-- Tetris Game Container -->
             <section id="tetris-container" class="game-container">
                 <h2>Tetris Game</h2>
-                <p>
-                    Experience my version of the classic Tetris game, complete with modern enhancements and 
-                    customizable features. Click the button below to play!
-                </p>
+                <p>My version of classic Tetris includes modern enhancements, levels, touch controls, a ghost piece, and N64-inspired silver and gold squares.</p>
                 <button onclick="location.href='Tetris Clone/index.html'" class="button">Play Tetris</button>
             </section>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Kenneth Delliber. All rights reserved.</p>
         <p><a href="contact.html" style="color: #ffd700; text-decoration: none;">Contact Me</a></p>

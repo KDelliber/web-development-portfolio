@@ -1,7 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Keep the portfolio navigation simple and consistent across pages.
+  // Older pages still contain the original Projects dropdown in their HTML,
+  // so replace it at runtime with one link to the Projects landing page.
+  const projectDropdown = document.querySelector('.top-nav .dropdown');
+
+  if (projectDropdown) {
+    const projectsLink = document.createElement('a');
+    projectsLink.href = 'projects.html';
+    projectsLink.textContent = 'Projects';
+    projectDropdown.replaceWith(projectsLink);
+  }
+
   const container = document.getElementById('threejs-container');
 
-  if (container) {
+  if (container && typeof THREE !== 'undefined') {
     // Initialize Three.js scene, camera, and renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(

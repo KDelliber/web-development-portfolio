@@ -1,15 +1,91 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Keep the portfolio navigation simple and consistent across pages.
-  // Older pages still contain the original Projects dropdown in their HTML,
-  // so replace it at runtime with one link to the Projects landing page.
-  const projectDropdown = document.querySelector('.top-nav .dropdown');
-
-  if (projectDropdown) {
-    const projectsLink = document.createElement('a');
-    projectsLink.href = 'projects.html';
-    projectsLink.textContent = 'Projects';
-    projectDropdown.replaceWith(projectsLink);
+  // Load the final polish stylesheet once across the portfolio.
+  if (!document.querySelector('link[href="polish.css"]')) {
+    const polishStyles = document.createElement('link');
+    polishStyles.rel = 'stylesheet';
+    polishStyles.href = 'polish.css';
+    document.head.appendChild(polishStyles);
   }
+
+  // Keep the main navigation identical across all root portfolio pages.
+  const nav = document.querySelector('.top-nav');
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const projectPages = new Set([
+    'projects.html',
+    'help_desk.html',
+    'home_network.html',
+    'pc-build-report.html',
+    'alienware_upgrade.html',
+    'capstone_project.html',
+    'games.html'
+  ]);
+
+  if (nav) {
+    nav.setAttribute('aria-label', 'Primary navigation');
+    nav.innerHTML = `
+      <a href="index.html">Home</a>
+      <a href="about_me.html">About Me</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="Kenneth%20Delliber%20Resume.docx" download>Résumé</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+    `;
+
+    let activeHref = currentPage;
+    if (projectPages.has(currentPage)) activeHref = 'projects.html';
+
+    nav.querySelectorAll('a').forEach(link => {
+      if (link.getAttribute('href') === activeHref) {
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+  }
+
+  // Give every project detail page an obvious path back to the Projects hub.
+  if (projectPages.has(currentPage) && currentPage !== 'projects.html') {
+    const mainContainer = document.querySelector('main .container');
+    if (mainContainer && !mainContainer.querySelector('.back-to-projects')) {
+      const backLink = document.createElement('a');
+      backLink.href = 'projects.html';
+      backLink.className = 'back-to-projects';
+      backLink.textContent = '← Back to Projects';
+      mainContainer.insertBefore(backLink, mainContainer.firstChild);
+    }
+  }
+
+  // Make the Help Desk project the clear featured item on the Projects page.
+  if (currentPage === 'projects.html') {
+    const helpDeskButton = document.querySelector('a[href="help_desk.html"].button');
+    const helpDeskSection = helpDeskButton?.closest('.section');
+
+    if (helpDeskSection) {
+      helpDeskSection.classList.add('featured-project');
+      if (!helpDeskSection.querySelector('.featured-badge')) {
+        const badge = document.createElement('span');
+        badge.className = 'featured-badge';
+        badge.textContent = 'Featured Work';
+        helpDeskSection.insertBefore(badge, helpDeskSection.firstChild);
+      }
+    }
+  }
+
+  // Make external links and downloads clearer without adding visual clutter.
+  document.querySelectorAll('a[target="_blank"]').forEach(link => {
+    link.classList.add('external-link');
+    if (!link.querySelector('.sr-only')) {
+      const note = document.createElement('span');
+      note.className = 'sr-only';
+      note.textContent = ' (opens in a new tab)';
+      link.appendChild(note);
+    }
+  });
+
+  document.querySelectorAll('a[download], button[onclick*=".docx"], button[onclick*=".xlsx"], button[onclick*=".pkt"]').forEach(control => {
+    control.classList.add('download-action');
+    if (!control.getAttribute('title')) {
+      control.setAttribute('title', 'Downloads a file');
+    }
+  });
 
   const container = document.getElementById('threejs-container');
 
@@ -25,18 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setClearColor(0xefefef); // Sidebar background color
+    renderer.setClearColor(0xefefef);
     container.appendChild(renderer.domElement);
 
-    // Define shapes, patriotic colors, and positions
     const shapes = [];
-    const patrioticColors = [0xff0000, 0xffffff, 0x0000ff]; // Red, White, Blue
-    const positions = [-8, 0, 8]; // Adjusted positions
+    const patrioticColors = [0xff0000, 0xffffff, 0x0000ff];
+    const positions = [-8, 0, 8];
 
-    // Shape 1: Icosahedron (Red)
     const icosahedronGeometry = new THREE.IcosahedronGeometry(3, 0);
     const redMaterial = new THREE.MeshStandardMaterial({
-      color: patrioticColors[0], // Red
+      color: patrioticColors[0],
       metalness: 0.8,
       roughness: 0.3,
     });
@@ -45,10 +119,9 @@ document.addEventListener('DOMContentLoaded', () => {
     shapes.push(icosahedron);
     scene.add(icosahedron);
 
-    // Shape 2: Torus Knot (White)
     const torusKnotGeometry = new THREE.TorusKnotGeometry(2.5, 0.5, 100, 16);
     const whiteMaterial = new THREE.MeshStandardMaterial({
-      color: patrioticColors[1], // White
+      color: patrioticColors[1],
       metalness: 0.9,
       roughness: 0.2,
     });
@@ -57,10 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
     shapes.push(torusKnot);
     scene.add(torusKnot);
 
-    // Shape 3: Dodecahedron (Blue)
     const dodecahedronGeometry = new THREE.DodecahedronGeometry(3, 0);
     const blueMaterial = new THREE.MeshStandardMaterial({
-      color: patrioticColors[2], // Blue
+      color: patrioticColors[2],
       metalness: 0.8,
       roughness: 0.3,
     });
@@ -69,18 +141,15 @@ document.addEventListener('DOMContentLoaded', () => {
     shapes.push(dodecahedron);
     scene.add(dodecahedron);
 
-    // Add lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Soft light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
 
     const pointLight = new THREE.PointLight(0xffffff, 1);
     pointLight.position.set(10, 10, 10);
     scene.add(pointLight);
 
-    // Adjust camera position
-    camera.position.z = 30; // Fit all shapes into view
+    camera.position.z = 30;
 
-    // Animation loop
     function animate() {
       requestAnimationFrame(animate);
       shapes.forEach((shape, index) => {
@@ -92,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     animate();
 
-    // Handle window resizing
     window.addEventListener('resize', () => {
       const width = container.clientWidth;
       const height = container.clientHeight;

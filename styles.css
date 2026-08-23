@@ -556,3 +556,18 @@ footer {
         height: 190px;
     }
 }
+
+
+/* More compact certification cards on desktop */
+@media (min-width: 901px) {
+    .cert-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .cert-grid .zoom-img {
+        max-width: min(100%, 240px);
+        height: 140px;
+        margin-bottom: 12px;
+    }
+}

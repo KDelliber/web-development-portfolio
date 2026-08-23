@@ -1,18 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const backToTopBtn = document.createElement('button');
-  backToTopBtn.id = 'backToTopBtn';
-  backToTopBtn.textContent = 'Back to Top';
-  document.body.appendChild(backToTopBtn);
+  const nav = document.querySelector('.top-nav');
+
+  if (nav) {
+    nav.innerHTML = `
+      <a href="index.html">Home</a>
+      <a href="about_me.html">About Me</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="Kenneth%20Delliber%20Resume.docx" download>Résumé</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+    `;
+  }
+
+  let backToTopBtn = document.getElementById('backToTopBtn');
+  if (!backToTopBtn) {
+    backToTopBtn = document.createElement('button');
+    backToTopBtn.id = 'backToTopBtn';
+    backToTopBtn.textContent = 'Back to Top';
+    document.body.appendChild(backToTopBtn);
+  }
 
   const footer = document.querySelector('footer');
 
-  // Function to handle button visibility and position
   const handleScroll = () => {
-    if (window.scrollY > 300) {
-      backToTopBtn.style.display = 'block';
-    } else {
-      backToTopBtn.style.display = 'none';
-    }
+    backToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
 
     if (footer) {
       const footerTop = footer.getBoundingClientRect().top;
@@ -26,10 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Show/hide the button and prevent overlap with footer
   window.addEventListener('scroll', handleScroll);
 
-  // Smooth scroll to top when button is clicked
   backToTopBtn.addEventListener('click', () => {
     window.scrollTo({
       top: 0,
@@ -37,6 +46,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Initial check to set the button state
   handleScroll();
 });

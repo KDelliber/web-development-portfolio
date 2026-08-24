@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="A neon 2048 game built with HTML, CSS, and JavaScript.">
+  <title>2048 Neon Grid</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --bg0:#050816;
+      --bg1:#0b1230;
+      --panel:#101936cc;
+      --line:#2b3f78;
+      --text:#f7fbff;
+      --muted:#9eb0d0;
+      --cyan:#64f4ff;
+      --violet:#b884ff;
+      --gold:#ffd166;
+      --tile-gap:10px;
+    }
+    html, body { margin:0; min-height:100%; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(100,244,255,.16), transparent 25%),
+        radial-gradient(circle at 88% 18%, rgba(184,132,255,.16), transparent 28%),
+        radial-gradient(circle at 50% 90%, rgba(255,209,102,.10), transparent 32%),
+        linear-gradient(160deg,var(--bg0),var(--bg1));
+      display:flex;
+      justify-content:center;
+      padding:22px 14px 34px;
+      overflow-x:hidden;
+    }
+    body::before {
+      content:"";
+      position:fixed; inset:0; pointer-events:none; opacity:.14;
+      background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size:28px 28px;
+      mask-image:linear-gradient(to bottom, black, transparent 78%);
+    }
+    .shell { width:min(100%, 560px); position:relative; z-index:1; }
+    .topbar { display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin-bottom:14px; }
+    .title-wrap h1 { margin:0; font-size:clamp(2.7rem, 12vw, 5.2rem); line-height:.9; letter-spacing:-.06em; text-shadow:0 0 24px rgba(100,244,255,.22); }
+    .title-wrap p { margin:8px 0 0; color:var(--muted); font-size:.92rem; }
+    .scores { display:flex; gap:8px; }
+    .scorebox {
+      min-width:88px; padding:9px 10px 10px; text-align:center; border:1px solid var(--line);
+      border-radius:14px; background:linear-gradient(180deg,rgba(19,31,66,.95),rgba(9,15,34,.95));
+      box-shadow:0 10px 28px rgba(0,0,0,.25), inset 0 0 18px rgba(100,244,255,.03);
+    }
+    .scorebox span { display:block; color:var(--muted); font-size:.68rem; text-transform:uppercase; letter-spacing:.12em; }
+    .scorebox strong { display:block; margin-top:3px; font-size:1.15rem; }
+    .toolbar { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px; }
+    .hint { color:var(--muted); font-size:.82rem; }
+    .btn {
+      border:1px solid #4461a7; border-radius:12px; background:linear-gradient(180deg,#1a2a5a,#111b3d);
+      color:white; min-height:42px; padding:0 15px; font-weight:800; letter-spacing:.02em; cursor:pointer;
+      box-shadow:0 7px 20px rgba(0,0,0,.25); touch-action:manipulation;
+    }
+    .btn:active { transform:translateY(1px) scale(.99); }
+    .board-wrap { position:relative; }
+    .board {
+      position:relative; width:100%; aspect-ratio:1/1; padding:var(--tile-gap); border-radius:24px;
+      background:
+        linear-gradient(145deg,rgba(18,30,64,.98),rgba(8,13,30,.98));
+      border:1px solid #36518f;
+      box-shadow:0 24px 60px rgba(0,0,0,.38), inset 0 0 40px rgba(100,244,255,.035), 0 0 40px rgba(100,244,255,.05);
+      overflow:hidden; touch-action:none;
+    }
+    .grid { display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(4,1fr); gap:var(--tile-gap); width:100%; height:100%; }
+    .cell { border-radius:18px; background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.018)); border:1px solid rgba(117,146,208,.13); box-shadow:inset 0 0 16px rgba(0,0,0,.18); }
+    .tile-layer { position:absolute; inset:var(--tile-gap); pointer-events:none; }
+    .tile {
+      position:absolute; width:calc((100% - 3 * var(--tile-gap)) / 4); height:calc((100% - 3 * var(--tile-gap)) / 4);
+      border-radius:18px; display:grid; place-items:center; font-weight:900;
+      font-size:clamp(1.55rem, 8vw, 3rem); letter-spacing:-.05em;
+      border:1px solid rgba(255,255,255,.22); box-shadow:0 10px 24px rgba(0,0,0,.22), inset 0 0 18px rgba(255,255,255,.08);
+      transition:transform .12s ease, opacity .12s ease; will-change:transform; text-shadow:0 2px 10px rgba(0,0,0,.28);
+    }
+    .spawn { animation:spawn .16s ease-out; }
+    .merge { animation:merge .2s ease-out; }
+    @keyframes spawn { from { transform:scale(.2); opacity:0; } to { transform:scale(1); opacity:1; } }
+    @keyframes merge { 0%{ transform:scale(.86);} 55%{transform:scale(1.16);} 100%{transform:scale(1);} }
+    .v2{background:linear-gradient(145deg,#1a3159,#163056); color:#dffbff; box-shadow:0 0 20px rgba(100,244,255,.08), inset 0 0 18px rgba(100,244,255,.04)}
+    .v4{background:linear-gradient(145deg,#1e3e67,#1d4a72); color:#e8feff; box-shadow:0 0 22px rgba(100,244,255,.12), inset 0 0 18px rgba(100,244,255,.05)}
+    .v8{background:linear-gradient(145deg,#314270,#423e84); color:#fff; box-shadow:0 0 24px rgba(184,132,255,.18)}
+    .v16{background:linear-gradient(145deg,#4a3f7c,#6a4c93); color:#fff; box-shadow:0 0 26px rgba(184,132,255,.24)}
+    .v32{background:linear-gradient(145deg,#6f4e87,#9b5f9e); color:#fff; box-shadow:0 0 28px rgba(230,130,255,.28)}
+    .v64{background:linear-gradient(145deg,#7f466c,#c45a7a); color:#fff; box-shadow:0 0 28px rgba(255,120,170,.30)}
+    .v128{background:linear-gradient(145deg,#8d5a3a,#d7893c); color:#fff8dc; box-shadow:0 0 30px rgba(255,181,71,.30)}
+    .v256{background:linear-gradient(145deg,#9c6c31,#e7ad3f); color:#fff9df; box-shadow:0 0 32px rgba(255,209,102,.34)}
+    .v512{background:linear-gradient(145deg,#8c7a26,#e6d04b); color:#fffdeb; box-shadow:0 0 34px rgba(255,236,90,.36)}
+    .v1024{background:linear-gradient(145deg,#3f7c71,#63e0c5); color:#061e22; box-shadow:0 0 36px rgba(99,224,197,.40)}
+    .v2048{background:linear-gradient(145deg,#2f7284,#64f4ff); color:#031319; box-shadow:0 0 42px rgba(100,244,255,.52)}
+    .v4096,.v8192{background:linear-gradient(145deg,#f3f7ff,#b9c8ff); color:#111936; box-shadow:0 0 48px rgba(210,226,255,.60)}
+    .overlay { position:absolute; inset:0; display:none; place-items:center; background:rgba(3,7,18,.76); backdrop-filter:blur(5px); z-index:5; }
+    .overlay.show { display:grid; }
+    .overlay-card { width:min(86%,360px); padding:24px; border-radius:20px; text-align:center; background:linear-gradient(180deg,#141f43,#0b1230); border:1px solid #4362a4; box-shadow:0 22px 55px rgba(0,0,0,.45); }
+    .overlay-card h2 { margin:0 0 8px; font-size:2rem; }
+    .overlay-card p { margin:0 0 18px; color:var(--muted); }
+    .controls { margin-top:14px; display:grid; grid-template-columns:repeat(3,1fr); gap:9px; max-width:300px; margin-left:auto; margin-right:auto; }
+    .ctrl { min-height:54px; border:1px solid #3b5592; border-radius:14px; background:linear-gradient(180deg,#182753,#101a38); color:#eaf7ff; font-size:1.25rem; font-weight:900; touch-action:none; }
+    .ctrl.blank { visibility:hidden; }
+    .legend { margin-top:14px; color:var(--muted); font-size:.78rem; text-align:center; line-height:1.5; }
+    .back { display:inline-block; margin-top:16px; color:#b9eaff; text-decoration:none; font-weight:700; }
+    .burst { position:fixed; width:8px; height:8px; border-radius:50%; pointer-events:none; z-index:20; animation:burst .7s ease-out forwards; box-shadow:0 0 10px currentColor; }
+    @keyframes burst { to { transform:translate(var(--dx),var(--dy)) scale(.1); opacity:0; } }
+    @media (max-width:540px){
+      body{padding:14px 10px 28px}.topbar{align-items:flex-start}.scores{gap:6px}.scorebox{min-width:72px;padding:7px 8px}.title-wrap p{font-size:.8rem}.toolbar{align-items:flex-start}.hint{max-width:58%;line-height:1.35}.board{border-radius:20px}.cell,.tile{border-radius:15px}.controls{max-width:280px}.ctrl{min-height:52px}
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <div class="title-wrap">
+        <h1>2048</h1>
+        <p>NEON GRID // MERGE. BUILD. ASCEND.</p>
+      </div>
+      <div class="scores">
+        <div class="scorebox"><span>Score</span><strong id="score">0</strong></div>
+        <div class="scorebox"><span>Best</span><strong id="best">0</strong></div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="hint">Swipe or use arrow keys / WASD</div>
+      <button class="btn" id="newGame">New Game</button>
+    </div>
+
+    <div class="board-wrap">
+      <section class="board" id="board" aria-label="2048 game board">
+        <div class="grid" aria-hidden="true">
+          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        </div>
+        <div class="tile-layer" id="tileLayer"></div>
+        <div class="overlay" id="overlay">
+          <div class="overlay-card">
+            <h2 id="overlayTitle">Game Over</h2>
+            <p id="overlayText">No more moves. Try another run.</p>
+            <button class="btn" id="restartOverlay">Play Again</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="controls" aria-label="2048 touch controls">
+      <button class="ctrl blank" aria-hidden="true"></button>
+      <button class="ctrl" data-dir="up">▲</button>
+      <button class="ctrl blank" aria-hidden="true"></button>
+      <button class="ctrl" data-dir="left">◀</button>
+      <button class="ctrl" data-dir="down">▼</button>
+      <button class="ctrl" data-dir="right">▶</button>
+    </div>
+
+    <div class="legend">Combine matching numbers to reach 2048. Keep going beyond 2048 if you want a bigger score.</div>
+    <a class="back" href="games.html">← Back to Portfolio Arcade</a>
+  </main>
+
+<script>
+(() => {
+  const SIZE=4;
+  const boardEl=document.getElementById('board');
+  const layer=document.getElementById('tileLayer');
+  const scoreEl=document.getElementById('score');
+  const bestEl=document.getElementById('best');
+  const overlay=document.getElementById('overlay');
+  const overlayTitle=document.getElementById('overlayTitle');
+  const overlayText=document.getElementById('overlayText');
+  let grid=[], score=0, best=Number(localStorage.getItem('neon2048-best')||0), wonShown=false, lastSpawn=null, lastMergeValues=new Set();
+  bestEl.textContent=best;
+
+  function emptyGrid(){ return Array.from({length:SIZE},()=>Array(SIZE).fill(0)); }
+  function start(){ grid=emptyGrid(); score=0; wonShown=false; overlay.classList.remove('show'); addRandom(); addRandom(); render(); }
+
+  function addRandom(){
+    const empties=[];
+    for(let r=0;r<SIZE;r++) for(let c=0;c<SIZE;c++) if(!grid[r][c]) empties.push([r,c]);
+    if(!empties.length) return;
+    const [r,c]=empties[Math.floor(Math.random()*empties.length)];
+    grid[r][c]=Math.random()<.9?2:4;
+    lastSpawn=`${r}-${c}`;
+  }
+
+  function slideLine(line){
+    const vals=line.filter(Boolean); const out=[]; let gained=0; const merged=[];
+    for(let i=0;i<vals.length;i++){
+      if(vals[i]===vals[i+1]){ const v=vals[i]*2; out.push(v); gained+=v; merged.push(v); i++; }
+      else out.push(vals[i]);
+    }
+    while(out.length<SIZE) out.push(0);
+    return {line:out,gained,merged};
+  }
+
+  function move(dir){
+    const before=JSON.stringify(grid); let gained=0; lastMergeValues=new Set();
+    if(dir==='left'||dir==='right'){
+      for(let r=0;r<SIZE;r++){
+        let line=[...grid[r]]; if(dir==='right') line.reverse();
+        const res=slideLine(line); let out=res.line; if(dir==='right') out.reverse();
+        grid[r]=out; gained+=res.gained; res.merged.forEach(v=>lastMergeValues.add(v));
+      }
+    } else {
+      for(let c=0;c<SIZE;c++){
+        let line=[]; for(let r=0;r<SIZE;r++) line.push(grid[r][c]); if(dir==='down') line.reverse();
+        const res=slideLine(line); let out=res.line; if(dir==='down') out.reverse();
+        for(let r=0;r<SIZE;r++) grid[r][c]=out[r]; gained+=res.gained; res.merged.forEach(v=>lastMergeValues.add(v));
+      }
+    }
+    if(JSON.stringify(grid)===before) return;
+    score+=gained; if(score>best){best=score; localStorage.setItem('neon2048-best',best);} addRandom(); render();
+    if(gained) burst();
+    if(!wonShown && grid.flat().some(v=>v>=2048)){ wonShown=true; overlayTitle.textContent='2048 Reached!'; overlayText.textContent='You made it. Keep going for an even bigger score.'; overlay.classList.add('show'); }
+    else if(!canMove()){ overlayTitle.textContent='Grid Locked'; overlayText.textContent=`Final score: ${score.toLocaleString()}`; overlay.classList.add('show'); }
+  }
+
+  function canMove(){
+    for(let r=0;r<SIZE;r++) for(let c=0;c<SIZE;c++){
+      if(!grid[r][c]) return true;
+      if(c<SIZE-1 && grid[r][c]===grid[r][c+1]) return true;
+      if(r<SIZE-1 && grid[r][c]===grid[r+1][c]) return true;
+    }
+    return false;
+  }
+
+  function render(){
+    layer.innerHTML=''; scoreEl.textContent=score.toLocaleString(); bestEl.textContent=best.toLocaleString();
+    const gap=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tile-gap'))||10;
+    for(let r=0;r<SIZE;r++) for(let c=0;c<SIZE;c++){
+      const v=grid[r][c]; if(!v) continue;
+      const tile=document.createElement('div');
+      tile.className=`tile v${Math.min(v,8192)}`;
+      tile.textContent=v;
+      tile.style.left=`calc(${c} * ((100% - 3 * var(--tile-gap)) / 4 + var(--tile-gap)))`;
+      tile.style.top=`calc(${r} * ((100% - 3 * var(--tile-gap)) / 4 + var(--tile-gap)))`;
+      if(lastSpawn===`${r}-${c}`) tile.classList.add('spawn');
+      if(lastMergeValues.has(v)) tile.classList.add('merge');
+      if(v>=1024) tile.style.fontSize='clamp(1.2rem, 6vw, 2.4rem)';
+      layer.appendChild(tile);
+    }
+    lastSpawn=null;
+  }
+
+  function burst(){
+    const rect=boardEl.getBoundingClientRect(); const cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
+    const palette=['#64f4ff','#b884ff','#ffd166','#f5fbff'];
+    for(let i=0;i<22;i++){
+      const p=document.createElement('i'); p.className='burst'; p.style.left=`${cx}px`; p.style.top=`${cy}px`; p.style.color=palette[i%palette.length];
+      const a=Math.random()*Math.PI*2, d=50+Math.random()*150; p.style.setProperty('--dx',`${Math.cos(a)*d}px`); p.style.setProperty('--dy',`${Math.sin(a)*d}px`);
+      document.body.appendChild(p); setTimeout(()=>p.remove(),750);
+    }
+  }
+
+  document.addEventListener('keydown',e=>{
+    const k=e.key.toLowerCase(); const map={arrowleft:'left',a:'left',arrowright:'right',d:'right',arrowup:'up',w:'up',arrowdown:'down',s:'down'};
+    if(map[k]){e.preventDefault(); move(map[k]);}
+  });
+  document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('pointerdown',e=>{e.preventDefault(); move(b.dataset.dir);}));
+  document.getElementById('newGame').addEventListener('click',start);
+  document.getElementById('restartOverlay').addEventListener('click',()=>{ if(wonShown && canMove()) overlay.classList.remove('show'); else start(); });
+
+  let sx=0, sy=0;
+  boardEl.addEventListener('pointerdown',e=>{sx=e.clientX; sy=e.clientY; boardEl.setPointerCapture?.(e.pointerId);});
+  boardEl.addEventListener('pointerup',e=>{
+    const dx=e.clientX-sx, dy=e.clientY-sy; if(Math.max(Math.abs(dx),Math.abs(dy))<24) return;
+    move(Math.abs(dx)>Math.abs(dy)?(dx>0?'right':'left'):(dy>0?'down':'up'));
+  });
+  start();
+})();
+</script>
+</body>
+</html>

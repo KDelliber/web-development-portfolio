@@ -586,3 +586,15 @@ footer {
 .has-decorative-sidebar main {
     margin-left: 0;
 }
+
+/* Keep the longer CNT certificate title aligned with the other cards */
+#porter-chester h2 {
+    font-size: 1.05rem;
+    white-space: nowrap;
+}
+
+@media (max-width: 420px) {
+    #porter-chester h2 {
+        white-space: normal;
+    }
+}

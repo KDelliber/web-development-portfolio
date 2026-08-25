@@ -12,6 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   }
 
+  const footer = document.querySelector('footer');
+
+  // Keep the AI-development disclosure consistent anywhere the shared footer script is used.
+  if (footer && !footer.textContent.includes('Built with assistance from ChatGPT')) {
+    const disclosure = document.createElement('p');
+    disclosure.textContent = 'Built with assistance from ChatGPT for development, troubleshooting, and iteration.';
+    const contactLine = Array.from(footer.querySelectorAll('p')).find(p => p.querySelector('a[href*="contact"]'));
+    if (contactLine) {
+      footer.insertBefore(disclosure, contactLine);
+    } else {
+      footer.appendChild(disclosure);
+    }
+  }
+
   let backToTopBtn = document.getElementById('backToTopBtn');
   if (!backToTopBtn) {
     backToTopBtn = document.createElement('button');
@@ -19,8 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     backToTopBtn.textContent = 'Back to Top';
     document.body.appendChild(backToTopBtn);
   }
-
-  const footer = document.querySelector('footer');
 
   const handleScroll = () => {
     backToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
@@ -40,10 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', handleScroll);
 
   backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   handleScroll();

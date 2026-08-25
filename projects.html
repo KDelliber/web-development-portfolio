@@ -3,36 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kenneth Delliber's IT portfolio projects covering help desk support, Active Directory practice, networking, PowerShell, PC hardware, systems, and web development.">
+    <meta name="description" content="Kenneth Delliber's hands-on IT support, Active Directory, networking, PowerShell, hardware, and systems projects.">
     <meta name="author" content="Kenneth Delliber">
-    <title>Projects</title>
+    <title>IT Projects | Kenneth Delliber</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="top-nav">
-        <a href="index.html">Home</a><a href="about_me.html">About Me</a><a href="certifications.html">Certifications</a><a href="Kenneth%20Delliber%20Resume.docx" download>Résumé</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a>
-    </div>
-    <div class="sidebar"><h3>Projects</h3><ul>
-        <li><a href="help_desk.html">IT Help Desk Lab</a></li><li><a href="ad-simulator.html">Active Directory Simulator</a></li><li><a href="network-lab.html">Network Troubleshooting Lab</a></li><li><a href="powershell-toolkit.html">PowerShell Support Toolkit</a></li><li><a href="home_network.html">Home Network Setup</a></li><li><a href="pc-build-report.html">PC Build Report</a></li><li><a href="alienware_upgrade.html">Alienware Upgrade</a></li><li><a href="capstone_project.html">College Capstone</a></li><li><a href="games.html">Games &amp; Web Development</a></li>
-    </ul></div>
-    <main><div class="container">
-        <section class="section"><h1>Projects</h1><p>Explore my hands-on IT support, networking, hardware, systems, and development work. These projects show how I troubleshoot problems, document solutions, build systems, and apply technical skills in practical situations.</p></section>
-        <section class="section"><h2>IT Help Desk Lab and Simulation</h2><p>Windows troubleshooting, Task Manager analysis, Windows Update diagnosis, customer communication, and help desk ticket documentation.</p><a href="help_desk.html" class="button">View Help Desk Project</a></section>
-        <section class="section"><h2>Active Directory Help Desk Simulator</h2><p>An ADUC-style training environment for practicing directory navigation, account management, password and lockout tasks, group membership, organizational units, and support scenarios.</p><a href="ad-simulator.html" class="button">Open AD Simulator</a></section>
-        <section class="section"><h2>Network Troubleshooting Lab</h2><p>An interactive Windows and Cisco-style support lab for diagnosing IP addressing, DHCP, DNS, gateways, VLANs, adapters, Wi-Fi, connectivity, and escalation scenarios using familiar troubleshooting commands and network views.</p><a href="network-lab.html" class="button">Open Network Lab</a></section>
-        <section class="section"><h2>PowerShell Support Toolkit</h2><p>A collection of practical PowerShell scripts for gathering system information, checking network configuration, reviewing disk space, validating Windows services, and surfacing recent event-log errors.</p><a href="powershell-toolkit.html" class="button">View PowerShell Toolkit</a></section>
-        <section class="section"><h2>Home Network Setup</h2><p>Network design and configuration project demonstrating connectivity planning, network devices, addressing, and troubleshooting.</p><a href="home_network.html" class="button">View Home Network Project</a></section>
-        <section class="section"><h2>PC Build Report</h2><p>A documented PC build demonstrating component selection, hardware installation, system assembly, and technical documentation.</p><a href="pc-build-report.html" class="button">View PC Build Report</a></section>
-        <section class="section"><h2>Alienware Upgrade</h2><p>A hardware upgrade and rebuild project covering component replacement, system maintenance, and practical PC troubleshooting.</p><a href="alienware_upgrade.html" class="button">View Alienware Upgrade</a></section>
-        <section class="section"><h2>College Capstone Project</h2><p>A digital transformation project combining business analysis, technology planning, networking, security, and technical recommendations.</p><a href="capstone_project.html" class="button">View Capstone Project</a></section>
-        <section class="section"><h2>Games and Web Development</h2><p>Browser-based games and interactive projects demonstrating HTML, CSS, JavaScript, debugging, responsive controls, and iterative development.</p><a href="games.html" class="button">View Games</a></section><div style="height:40px"></div>
-    </div></main>
+<body class="has-decorative-sidebar">
+    <nav class="top-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="about_me.html">About Me</a>
+        <a href="certifications.html">Certifications</a>
+        <a href="Kenneth%20Delliber%20Resume.docx" download>Résumé</a>
+        <div class="dropdown">
+            <button class="dropbtn" aria-current="page">Projects</button>
+            <div class="dropdown-content">
+                <a href="projects.html">All Projects</a>
+                <a href="help_desk.html">IT Help Desk Simulation</a>
+                <a href="ad-simulator.html">Active Directory Simulator</a>
+                <a href="network-lab.html">Network Troubleshooting Lab</a>
+                <a href="powershell-toolkit.html">PowerShell Support Toolkit</a>
+                <a href="home_network.html">Home Network Setup</a>
+                <a href="alienware_upgrade.html">Alienware Upgrade</a>
+                <a href="pc-build-report.html">PC Build Report</a>
+                <a href="capstone_project.html">Capstone Project</a>
+                <a href="games.html">Games</a>
+            </div>
+        </div>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <main>
+        <div class="container">
+            <header class="section projects-intro">
+                <span class="eyebrow">Hands-on experience</span>
+                <h1>IT Projects</h1>
+                <p>Practical work across help desk support, Active Directory, networking, automation, computer hardware, and systems planning. Choose a project to see the process, troubleshooting, and results.</p>
+            </header>
+            <section class="project-grid" aria-label="Project collection">
+                <article class="project-card">
+                    <span class="project-tag">Support Operations</span>
+                    <h2>IT Help Desk Lab and Simulation</h2>
+                    <p>Windows troubleshooting, customer communication, prioritization, escalation, and complete help desk ticket documentation.</p>
+                    <ul class="project-skills"><li>Ticket workflow</li><li>Troubleshooting</li><li>Escalation</li></ul>
+                    <a class="button" href="help_desk.html">View project</a>
+                </article>
+                <article class="project-card">
+                    <span class="project-tag">Identity & Access</span>
+                    <h2>Active Directory Help Desk Simulator</h2>
+                    <p>An ADUC-style training environment for practicing account management, password and lockout tasks, group membership, and organizational units.</p>
+                    <ul class="project-skills"><li>Active Directory</li><li>User accounts</li><li>Groups & OUs</li></ul>
+                    <a class="button" href="ad-simulator.html">Open simulator</a>
+                </article>
+                <article class="project-card">
+                    <span class="project-tag">Networking</span>
+                    <h2>Network Troubleshooting Lab</h2>
+                    <p>An interactive Windows and Cisco-style lab for diagnosing DHCP, DNS, gateways, VLANs, adapters, Wi-Fi, and connectivity issues.</p>
+                    <ul class="project-skills"><li>TCP/IP</li><li>DNS & DHCP</li><li>Cisco concepts</li></ul>
+                    <a class="button" href="network-lab.html">Open lab</a>
+                </article>
+                <article class="project-card">
+                    <span class="project-tag">Automation</span>
+                    <h2>PowerShell Support Toolkit</h2>
+                    <p>Practical scripts for gathering system information, checking network configuration, reviewing disk space, validating services, and surfacing event-log errors.</p>
+                    <ul class="project-skills"><li>PowerShell</li><li>Diagnostics</li><li>Automation</li></ul>
+                    <a class="button" href="powershell-toolkit.html">View toolkit</a>
+                </article>
+                <article class="project-card">
+                    <span class="project-tag">Network Design</span>
+                    <h2>Home Network Setup</h2>
+                    <p>A documented network project demonstrating connectivity planning, network devices, addressing, configuration, and troubleshooting.</p>
+                    <ul class="project-skills"><li>Network setup</li><li>Addressing</li><li>Documentation</li></ul>
+                    <a class="button" href="home_network.html">View project</a>
+                </article>
+                <article class="project-card">
+                    <span class="project-tag">Hardware</span>
+                    <h2>PC Build Report</h2>
+                    <p>A structured PC build report covering component selection, compatibility, hardware installation, system assembly, and technical documentation.</p>
+                    <ul class="project-skills"><li>Components</li><li>Compatibility</li><li>Assembly</li></ul>
+                    <a class="button" href="pc-build-report.html">View report</a>
+                </article>
+                <article class="project-card">
+                    <span class="project-tag">Hardware Upgrade</span>
+                    <h2>Alienware Upgrade</h2>
+                    <p>A hands-on computer upgrade and rebuild covering component replacement, system maintenance, compatibility, and verification.</p>
+                    <ul class="project-skills"><li>PC hardware</li><li>Upgrades</li><li>Validation</li></ul>
+                    <a class="button" href="alienware_upgrade.html">View project</a>
+                </article>
+                <article class="project-card">
+                    <span class="project-tag">Systems Planning</span>
+                    <h2>College Capstone Project</h2>
+                    <p>A digital transformation project combining business analysis, technology planning, networking, security, and technical recommendations.</p>
+                    <ul class="project-skills"><li>Planning</li><li>Security</li><li>Presentation</li></ul>
+                    <a class="button" href="capstone_project.html">View project</a>
+                </article>
+                <article class="project-card">
+                    <span class="project-tag">Development</span>
+                    <h2>Games and Web Development</h2>
+                    <p>Browser-based games and interactive projects demonstrating HTML, CSS, JavaScript, debugging, responsive controls, and iteration.</p>
+                    <ul class="project-skills"><li>JavaScript</li><li>Testing</li><li>Iteration</li></ul>
+                    <a class="button" href="games.html">View projects</a>
+                </article>
+            </section>
+        </div>
+    </main>
     <footer>
         <p>&copy; 2026 Kenneth Delliber. All rights reserved.</p>
         <p>Built with assistance from ChatGPT for development, troubleshooting, and iteration.</p>
-        <p><a href="contact.html" style="color:#ffd700;text-decoration:none">Contact Me</a></p>
+        <p><a href="contact.html">Contact Me</a></p>
         <button id="backToTopBtn">Back to Top</button>
     </footer>
-    <script src="modal.js"></script><script src="backToTop.js"></script>
-</body></html>
+    <script src="backToTop.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Active Directory help desk simulator for practicing common user and access-management tasks.">
+<title>Active Directory Help Desk Simulator</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#eef2f6;color:#1f2937}.app{display:grid;grid-template-columns:230px 1fr;min-height:100vh}.sidebar{background:#1f2937;color:#fff;padding:18px}.sidebar h1{font-size:1.1rem;margin:0 0 18px}.navbtn{display:block;width:100%;padding:11px 12px;margin:7px 0;border:0;border-radius:8px;background:#374151;color:white;text-align:left;font-weight:600;cursor:pointer}.navbtn.active,.navbtn:hover{background:#2563eb}.main{padding:20px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:16px}.badge{background:#dbeafe;color:#1d4ed8;padding:6px 10px;border-radius:999px;font-size:.8rem;font-weight:700}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.panel{background:#fff;border:1px solid #d7dee7;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.06);padding:16px}.panel h2,.panel h3{margin-top:0}.userlist{display:grid;gap:10px}.user{border:1px solid #d8dee8;border-radius:10px;padding:12px;display:flex;justify-content:space-between;gap:10px;align-items:center}.muted{color:#667085;font-size:.9rem}.status{font-size:.75rem;font-weight:700;padding:5px 8px;border-radius:999px}.ok{background:#dcfce7;color:#166534}.warn{background:#fef3c7;color:#92400e}.bad{background:#fee2e2;color:#991b1b}.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}.action{padding:10px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc;cursor:pointer;font-weight:600}.action:hover{background:#eaf2ff}.ticket{border-left:4px solid #2563eb;background:#f8fbff;padding:12px;border-radius:8px;margin-bottom:12px}.log{font-family:Consolas,monospace;background:#111827;color:#d1fae5;border-radius:10px;padding:12px;min-height:120px;white-space:pre-wrap}.field{margin:10px 0}.field label{display:block;font-size:.82rem;font-weight:700;margin-bottom:4px}.field input,.field select{width:100%;padding:9px;border:1px solid #cbd5e1;border-radius:7px}.primary{padding:10px 14px;border:0;border-radius:8px;background:#2563eb;color:#fff;font-weight:700;cursor:pointer}.result{margin-top:10px;padding:10px;border-radius:8px;display:none}.result.show{display:block}.result.good{background:#dcfce7;color:#166534}.result.fail{background:#fee2e2;color:#991b1b}.small{font-size:.82rem}.back{display:inline-block;margin-top:14px;color:#2563eb;text-decoration:none;font-weight:700}@media(max-width:800px){.app{grid-template-columns:1fr}.sidebar{display:flex;gap:8px;overflow:auto;align-items:center}.sidebar h1{display:none}.navbtn{min-width:150px;margin:0}.grid{grid-template-columns:1fr}.main{padding:12px}.top{align-items:flex-start;flex-direction:column}.actions{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+<h1>AD Help Desk Simulator</h1>
+<button class="navbtn active">Users & Computers</button>
+<button class="navbtn">Groups</button>
+<button class="navbtn">Scenarios</button>
+<button class="navbtn">Audit Log</button>
+</aside>
+<main class="main">
+<div class="top"><div><h1 style="margin:0">Active Directory Help Desk Simulator</h1><div class="muted">Practice common account and access-management tasks in a safe mock environment.</div></div><span class="badge">Training Environment</span></div>
+<div class="grid">
+<section class="panel">
+<h2>Directory Users</h2>
+<div id="userList" class="userlist"></div>
+</section>
+<aside class="panel">
+<h3>Current Ticket</h3>
+<div id="ticket" class="ticket"></div>
+<div id="detail"></div>
+<div class="actions">
+<button class="action" onclick="doAction('reset')">Reset Password</button>
+<button class="action" onclick="doAction('unlock')">Unlock Account</button>
+<button class="action" onclick="doAction('disable')">Disable Account</button>
+<button class="action" onclick="doAction('group')">Change Group</button>
+</div>
+<div id="result" class="result"></div>
+<hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0">
+<h3>Activity Log</h3>
+<div id="log" class="log"></div>
+<a class="back" href="projects.html">← Back to Projects</a>
+</aside>
+</div>
+</main>
+</div>
+<script>
+const users=[
+{name:'Maya Chen',user:'mchen',dept:'Accounting',groups:['Domain Users','Accounting'],locked:true,disabled:false},
+{name:'Luis Rivera',user:'lrivera',dept:'Sales',groups:['Domain Users','Sales'],locked:false,disabled:false},
+{name:'Dana Brooks',user:'dbrooks',dept:'HR',groups:['Domain Users','HR'],locked:false,disabled:true},
+{name:'Evan Holt',user:'eholt',dept:'Support',groups:['Domain Users','Help Desk'],locked:false,disabled:false}
+];
+const tickets=[
+{title:'HD-201: User locked out',text:'Maya Chen reports she entered her old password several times and can no longer sign in.',target:'mchen',correct:'unlock'},
+{title:'HD-202: Password reset request',text:'Luis Rivera forgot his password after returning from vacation. Identity has been verified.',target:'lrivera',correct:'reset'},
+{title:'HD-203: Former employee account',text:'HR confirms Dana Brooks has left the company and the account must remain disabled.',target:'dbrooks',correct:'disable'},
+{title:'HD-204: Access request',text:'Evan Holt is temporarily assisting Sales and needs membership in the Sales security group.',target:'eholt',correct:'group'}
+];
+let current=0;const log=[];
+function render(){document.getElementById('userList').innerHTML=users.map(u=>`<div class="user"><div><strong>${u.name}</strong><div class="muted">${u.user} · ${u.dept}</div><div class="small">Groups: ${u.groups.join(', ')}</div></div><span class="status ${u.disabled?'bad':u.locked?'warn':'ok'}">${u.disabled?'Disabled':u.locked?'Locked':'Active'}</span></div>`).join('');const t=tickets[current];document.getElementById('ticket').innerHTML=`<strong>${t.title}</strong><div class="muted" style="margin-top:6px">${t.text}</div>`;document.getElementById('detail').innerHTML=`<div class="small"><strong>Target:</strong> ${users.find(u=>u.user===t.target).name}</div>`;document.getElementById('log').textContent=log.length?log.join('\n'):'No changes yet.'}
+function doAction(action){const t=tickets[current],u=users.find(x=>x.user===t.target),r=document.getElementById('result');let msg='',good=action===t.correct;if(good){if(action==='unlock')u.locked=false;if(action==='disable')u.disabled=true;if(action==='group'&&!u.groups.includes('Sales'))u.groups.push('Sales');msg='Correct action. Ticket completed.';log.push(`${new Date().toLocaleTimeString()}  ${action.toUpperCase()}  ${u.user}  SUCCESS`);current=(current+1)%tickets.length}else{msg='That action does not match the current ticket. Review the request and try again.';log.push(`${new Date().toLocaleTimeString()}  ${action.toUpperCase()}  ${u.user}  NOT APPLIED`)}r.textContent=msg;r.className='result show '+(good?'good':'fail');render();setTimeout(()=>{r.className='result'},1800)}
+render();
+</script>
+</body>
+</html>

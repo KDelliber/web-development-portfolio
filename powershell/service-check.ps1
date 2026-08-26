@@ -3,21 +3,26 @@
 
 $services = @('Dnscache','Dhcp','Spooler','wuauserv')
 
-foreach ($name in $services) {
+$results = foreach ($name in $services) {
     $svc = Get-Service -Name $name -ErrorAction SilentlyContinue
+
     if ($svc) {
         [PSCustomObject]@{
-            Service = $svc.DisplayName
-            Name = $svc.Name
-            Status = $svc.Status
+            Service   = $svc.DisplayName
+            Name      = $svc.Name
+            Status    = $svc.Status
             StartType = $svc.StartType
         }
-    } else {
+    }
+    else {
         [PSCustomObject]@{
-            Service = $name
-            Name = $name
-            Status = 'Not Found'
+            Service   = $name
+            Name      = $name
+            Status    = 'Not Found'
             StartType = '-'
         }
     }
-} | Format-Table -AutoSize
+}
+
+$results | Format-Table -AutoSize
+

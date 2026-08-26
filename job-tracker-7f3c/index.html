@@ -1,1 +1,924 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0f172a"><link rel="manifest" href="manifest.webmanifest"><title>Job Application Tracker</title><style>:root{--navy:#0b2135;--navy-2:#123a59;--blue:#1769e0;--blue-dark:#0f56bc;--bg:#f4f7fa;--surface:#fff;--line:#dce4ec;--line-soft:#edf1f5;--ink:#162b3a;--muted:#63788b;--green:#08775b;--red:#b42318;--amber:#9a5b08;--shadow:0 8px 24px rgba(15, 39, 61, 0.07)}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#eef3f7 0,#f7f9fb 320px);color:var(--ink);font:14px/1.5 "Segoe UI",Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}main{width:min(1180px,100%);margin:auto;padding:28px 24px 46px}.apphead{position:relative;overflow:hidden;margin-bottom:18px;padding:31px 32px;border-radius:14px;background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;box-shadow:0 16px 42px rgba(10,33,53,.17)}.apphead:after{content:"";position:absolute;width:230px;height:230px;right:-100px;top:-130px;border:42px solid rgba(255,255,255,.055);border-radius:50%}.apphead h1{position:relative;z-index:1;margin:0 0 5px;font-size:clamp(25px, 4vw, 36px);line-height:1.2;letter-spacing:-.03em}.apphead .muted{position:relative;z-index:1;color:#b8ccda}.muted{color:var(--muted)}.auth,.bar,.filters,.stats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.session{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px;padding:11px 14px!important}.card{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:14px;box-shadow:var(--shadow)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:19px 0}.stats .card{position:relative;min-width:0;overflow:hidden;padding:17px 18px}.stats .card:after{content:"";position:absolute;right:0;top:0;width:4px;height:100%;background:#cbd7e2}.stats .card:nth-child(2):after{background:#2d7ee7}.stats .card:nth-child(3):after{background:#8b6bd6}.stats .card:nth-child(4):after{background:#e2a33c}.stats b{display:block;font-size:28px;line-height:1.1;letter-spacing:-.04em}.stats .muted{font-size:12px;font-weight:650;margin-top:2px}.clickcard{cursor:pointer;transition:.15s ease}.clickcard:focus,.clickcard:hover{border-color:#83afe5;transform:translateY(-2px);outline:0}.clickcard.active{border-color:#4d90e5;box-shadow:0 0 0 3px rgba(23,105,224,.13)}.clickhint{font-size:10px;color:var(--blue);margin-top:4px;font-weight:700}.btn,input,select,textarea{font:inherit;border:1px solid #ccd8e3;border-radius:7px;padding:9px 10px}.btn{background:#fff;color:#294154;font-weight:650;cursor:pointer;box-shadow:0 1px 2px rgba(10,37,64,.04);transition:.15s ease}.btn:hover{border-color:#aebfce;background:#f8fafc;transform:translateY(-1px)}.primary{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 5px 12px rgba(23,105,224,.2)}.primary:hover{background:var(--blue-dark);border-color:var(--blue-dark)}input,select,textarea{background:#fff;color:var(--ink);transition:.15s ease}input:focus,select:focus,textarea:focus{outline:0;border-color:#4e91e9;box-shadow:0 0 0 3px rgba(23,105,224,.1)}.auth{align-items:center}.auth input{flex:1 1 220px}.hidden{display:none!important}.controls{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:16px 0 10px}.filters{flex:1;margin:0}.filters input{flex:1;min-width:230px}.filters select{min-width:150px}.sortbar{display:flex;align-items:center;gap:7px;white-space:nowrap;color:var(--muted);font-size:11px}.sortbar label{font-weight:750;text-transform:uppercase;letter-spacing:.055em}.sortbar select{min-width:190px;padding:8px 28px 8px 9px}.filtermsg{display:none;margin:0 0 12px;padding:10px 12px;border:1px solid #c7dcf7;border-radius:8px;background:#edf5ff;color:#245b91}.filtermsg.show{display:block}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:11px;background:#fff;box-shadow:var(--shadow)}table{width:100%;border-collapse:collapse;min-width:850px}td,th{padding:12px;border-bottom:1px solid var(--line-soft);text-align:left;vertical-align:middle}th{background:#f7f9fb;color:#687b8d;font-size:10.5px;letter-spacing:.055em;text-transform:uppercase}tbody tr{transition:background .12s ease}tbody tr:hover{background:#f7faff}.company{font-weight:750;color:#20394b}.role{margin-top:2px;color:#334d60}.location{font-size:11px;margin-top:2px}.statuspill{display:inline-block;padding:4px 8px;border-radius:999px;background:#edf2f6;color:#486174;font-size:10.5px;font-weight:750;white-space:nowrap}.status-applied,.status-follow-up{background:#eaf2ff;color:#175cd3}.status-interview,.status-phone-screen,.status-second-interview{background:#f1ebff;color:#6941c6}.status-offer{background:#e8f7f0;color:var(--green)}.status-rejected,.status-withdrawn{background:#fdecea;color:var(--red)}.status-interested{background:#fff3df;color:var(--amber)}.tablelink{display:inline-block;margin-right:5px;padding:4px 7px;border-radius:5px;background:#eef5ff;color:var(--blue);font-size:11px;font-weight:700;text-decoration:none}.modal{position:fixed;inset:0;z-index:20;background:rgba(6,18,29,.72);display:none;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(3px)}.modal.show{display:flex}.dialog{width:min(780px,100%);max-height:92vh;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 24px 70px rgba(0,0,0,.25)}.dialog h2{margin:0 0 17px;font-size:21px;letter-spacing:-.02em}.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.full{grid-column:1/-1}.grid label{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.055em;font-weight:750;margin-bottom:5px}.grid input,.grid select,.grid textarea{width:100%}.grid textarea{min-height:105px;resize:vertical}.actions{display:flex;gap:8px;justify-content:flex-end;margin-top:17px}@media (max-width:760px){main{padding:14px 11px 30px}.apphead{padding:25px 21px}.stats{grid-template-columns:1fr 1fr;gap:9px}.controls{display:block}.filters{display:grid}.filters input{min-width:0}.sortbar{margin-top:9px}.sortbar select{flex:1;min-width:0}.session{align-items:flex-start;flex-direction:column}.grid{grid-template-columns:1fr}.full{grid-column:auto}}@media (max-width:440px){.stats .card{padding:13px}.stats b{font-size:24px}.bar{display:grid;grid-template-columns:1fr 1fr}.bar .btn{width:100%}}</style></head><body><main><header class="apphead"><h1>Job Application Tracker</h1><div class="muted">A private workspace for applications, interviews, and follow-ups.</div></header><div id="status" class="card session">Not signed in.</div><div class="bar"><button id="loginToggle" class="btn">Login</button><button id="logout" class="btn hidden">Logout</button><button id="add" class="btn primary hidden">+ Add Application</button></div><div id="auth" class="auth card hidden"><input id="email" type="email" placeholder="Email"><input id="password" type="password" placeholder="Password"><button id="signin" class="btn primary">Sign In</button><button id="signup" class="btn">Create Login</button><span id="authmsg" class="muted"></span></div><section id="app" class="hidden"><div class="stats"><div class="card"><b id="total">0</b><div class="muted">Applications</div></div><div class="card"><b id="active">0</b><div class="muted">Active</div></div><div class="card"><b id="interviews">0</b><div class="muted">Interviews</div></div><div id="dueCard" class="card clickcard" role="button" tabindex="0" aria-label="Show applications due for follow-up"><b id="due">0</b><div class="muted">Follow-ups due</div><div class="clickhint">Tap to view</div></div></div><div id="filterMsg" class="filtermsg">Showing applications due or overdue for follow-up. Tap the Follow-ups due card again to show all.</div><div class="controls"><div class="filters"><input id="search" placeholder="Search company, role, notes" aria-label="Search applications"><select id="filter"><option value="">All statuses</option><option>Interested</option><option>Applied</option><option>Follow Up</option><option>Phone Screen</option><option>Interview</option><option>Second Interview</option><option>Offer</option><option>Rejected</option><option>Withdrawn</option></select></div><div class="sortbar"><label for="sort">Sort</label><select id="sort" aria-label="Sort applications"><option value="applied-desc">Applied — newest first</option><option value="applied-asc">Applied — oldest first</option><option value="interest">Interest — highest first</option><option value="followup-asc">Follow-up — soonest first</option><option value="company-asc">Company — A to Z</option><option value="status">Status</option></select></div></div><div class="tablewrap"><table><thead><tr><th>Company / Role</th><th>Status</th><th>Interest</th><th>Applied</th><th>Follow Up</th><th>Links</th><th></th></tr></thead><tbody id="tbody"></tbody></table></div></section></main><div id="modal" class="modal"><div class="dialog"><h2 id="mtitle">Add Application</h2><form id="form"><div class="grid"><div><label>Company</label><input id="company" required></div><div><label>Job Title</label><input id="title" required></div><div><label>Location</label><input id="location"></div><div><label>Pay</label><input id="pay"></div><div><label>Date Applied</label><input id="applied" type="date"></div><div><label>Status</label><select id="jobstatus"><option>Interested</option><option selected="selected">Applied</option><option>Follow Up</option><option>Phone Screen</option><option>Interview</option><option>Second Interview</option><option>Offer</option><option>Rejected</option><option>Withdrawn</option></select></div><div><label>Interest Level</label><select id="interest"><option>Low</option><option selected="selected">Medium</option><option>High</option></select></div><div><label>Follow Up</label><input id="followup" type="date"></div><div><label>Interview</label><input id="interview" type="datetime-local"></div><div class="full"><label>Job Posting Link</label><input id="joburl" type="url"></div><div class="full"><label>Resume Used Link</label><input id="resumeurl" type="url"></div><div class="full"><label>Cover Letter Link</label><input id="coverletterurl" type="url"></div><div><label>Contact Name</label><input id="contactname"></div><div><label>Contact Info</label><input id="contactinfo"></div><div class="full"><label>Notes</label><textarea id="notes"></textarea></div></div><div class="actions"><button type="button" id="del" class="btn hidden">Delete</button><button type="button" id="cancel" class="btn">Cancel</button><button class="btn primary" type="submit">Save</button></div></form></div></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>const sb=supabase.createClient("https://pvcgzpkkomhvfxhsnvco.supabase.co","sb_publishable_ElsfvlLztssSxhRnP5gb9Q_RyDEpb9X");let user=null,rows=[],editing=null,dueOnly=!1,followupOverridden=!1,currentSort="applied-desc";const $=e=>document.getElementById(e),esc=e=>String(e??"").replace(/[&<>"']/g,e=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[e])),slug=e=>String(e).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""),closed=e=>["Offer","Rejected","Withdrawn"].includes(e),today=()=>(new Date).toISOString().slice(0,10),addDays=(e,t)=>{if(!e)return"";const[l,a,o]=e.split("-").map(Number),s=new Date(Date.UTC(l,a-1,o));return s.setUTCDate(s.getUTCDate()+t),s.toISOString().slice(0,10)},defaultFollowup=()=>addDays($("applied").value,7),syncFollowup=()=>{followupOverridden||($("followup").value=defaultFollowup())};async function refresh(){const{data:e}=await sb.auth.getSession();user=e.session?.user||null,user?($("status").innerHTML="Synced as <b>"+user.email+"</b>",$("app").classList.remove("hidden"),$("add").classList.remove("hidden"),$("logout").classList.remove("hidden"),$("loginToggle").classList.add("hidden"),$("auth").classList.add("hidden"),await load()):($("status").textContent="Not signed in. Your job data requires login.",$("app").classList.add("hidden"),$("add").classList.add("hidden"),$("logout").classList.add("hidden"),$("loginToggle").classList.remove("hidden"))}async function load(){const{data:e,error:t}=await sb.from("applications").select("*").order("applied",{ascending:!1});t?$("status").textContent=t.message:(rows=e||[],render())}function compareRows(e,t){const l=e=>e?Date.parse(e+"T00:00:00Z"):0,a={High:3,Medium:2,Low:1};return"applied-asc"===currentSort?l(e.applied)-l(t.applied)||e.company.localeCompare(t.company):"interest"===currentSort?(a[t.interest_level]||0)-(a[e.interest_level]||0)||l(t.applied)-l(e.applied):"followup-asc"===currentSort?(e.followup?l(e.followup):1/0)-(t.followup?l(t.followup):1/0)||l(t.applied)-l(e.applied):"company-asc"===currentSort?e.company.localeCompare(t.company)||l(t.applied)-l(e.applied):"status"===currentSort?e.status.localeCompare(t.status)||l(t.applied)-l(e.applied):l(t.applied)-l(e.applied)||e.company.localeCompare(t.company)}function render(){const e=$("search").value.toLowerCase(),t=$("filter").value,l=rows.filter(l=>(!e||[l.company,l.title,l.location,l.notes,l.interest_level].join(" ").toLowerCase().includes(e))&&(!t||l.status===t)&&(!dueOnly||l.followup&&!closed(l.status)&&l.followup<=today())).slice().sort(compareRows);$("tbody").innerHTML=l.map(e=>`<tr><td><div class="company">${esc(e.company)}</div><div class="role">${esc(e.title)}</div><div class="muted location">${esc(e.location||"")}</div></td><td><span class="statuspill status-${slug(e.status)}">${esc(e.status)}</span></td><td>${esc(e.interest_level||"Medium")}</td><td>${esc(e.applied||"—")}</td><td>${esc(e.followup||"—")}</td><td>${e.job_url?`<a class="tablelink" href="${esc(e.job_url)}" target="_blank" rel="noopener">Job</a> `:""}${e.resume_url?`<a class="tablelink" href="${esc(e.resume_url)}" target="_blank" rel="noopener">Resume</a> `:""}${e.cover_letter_url?`<a class="tablelink" href="${esc(e.cover_letter_url)}" target="_blank" rel="noopener">Cover Letter</a>`:""}</td><td><button class="btn" data-edit="${esc(e.id)}">Edit</button></td></tr>`).join(""),$("total").textContent=rows.length,$("active").textContent=rows.filter(e=>!closed(e.status)).length,$("interviews").textContent=rows.filter(e=>["Phone Screen","Interview","Second Interview"].includes(e.status)).length,$("due").textContent=rows.filter(e=>e.followup&&!closed(e.status)&&e.followup<=today()).length,$("dueCard").classList.toggle("active",dueOnly),$("filterMsg").classList.toggle("show",dueOnly),document.querySelectorAll("[data-edit]").forEach(e=>e.onclick=()=>open(rows.find(t=>t.id===e.dataset.edit)))}function open(e=null){editing=e?.id||null,$("mtitle").textContent=e?"Edit Application":"Add Application",$("del").classList.toggle("hidden",!e);for(const[t,l]of[["company","company"],["title","title"],["location","location"],["pay","pay"],["applied","applied"],["jobstatus","status"],["interest","interest_level"],["followup","followup"],["joburl","job_url"],["resumeurl","resume_url"],["coverletterurl","cover_letter_url"],["contactname","contact_name"],["contactinfo","contact_info"],["notes","notes"]])$(t).value=e?.[l]||"";$("interview").value=e?.interview?String(e.interview).slice(0,16):"",e||($("applied").value=today(),$("jobstatus").value="Applied",$("interest").value="Medium"),followupOverridden=!(!e?.followup||e.followup===defaultFollowup()),syncFollowup(),$("modal").classList.add("show")}function close(){$("modal").classList.remove("show")}function toggleDue(){dueOnly=!dueOnly,render(),dueOnly&&$("filterMsg").scrollIntoView({behavior:"smooth",block:"nearest"})}$("loginToggle").onclick=()=>$("auth").classList.toggle("hidden"),$("signin").onclick=async()=>{const{error:e}=await sb.auth.signInWithPassword({email:$("email").value,password:$("password").value});$("authmsg").textContent=e?e.message:"",e||refresh()},$("signup").onclick=async()=>{const{error:e}=await sb.auth.signUp({email:$("email").value,password:$("password").value});$("authmsg").textContent=e?e.message:"Account created. Check email if confirmation is required."},$("logout").onclick=async()=>{await sb.auth.signOut(),refresh()},$("add").onclick=()=>open(),$("cancel").onclick=close,$("form").onsubmit=async e=>{e.preventDefault();const t={user_id:user.id,company:$("company").value.trim(),title:$("title").value.trim(),location:$("location").value.trim(),pay:$("pay").value.trim(),applied:$("applied").value||null,status:$("jobstatus").value,interest_level:$("interest").value,followup:$("followup").value||null,interview:$("interview").value?new Date($("interview").value).toISOString():null,job_url:$("joburl").value.trim(),resume_url:$("resumeurl").value.trim(),cover_letter_url:$("coverletterurl").value.trim(),contact_name:$("contactname").value.trim(),contact_info:$("contactinfo").value.trim(),notes:$("notes").value.trim()},l=editing?await sb.from("applications").update(t).eq("id",editing):await sb.from("applications").insert(t);l.error?$("status").textContent=l.error.message:(close(),await load())},$("del").onclick=async()=>{editing&&confirm("Delete this application?")&&(await sb.from("applications").delete().eq("id",editing),close(),await load())},$("applied").oninput=syncFollowup,$("followup").oninput=()=>{followupOverridden=$("followup").value!==defaultFollowup()},$("search").oninput=render,$("filter").onchange=render,$("sort").onchange=e=>{currentSort=e.target.value,render()},$("dueCard").onclick=toggleDue,$("dueCard").onkeydown=e=>{"Enter"!==e.key&&" "!==e.key||(e.preventDefault(),toggleDue())},"serviceWorker"in navigator&&navigator.serviceWorker.register("sw.js").catch(()=>{}),refresh()</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <title>Job Application Tracker</title>
+    <style>
+      :root {
+        --navy: #0b2135;
+        --navy-2: #123a59;
+        --blue: #1769e0;
+        --blue-dark: #0f56bc;
+        --bg: #f4f7fa;
+        --surface: #fff;
+        --line: #dce4ec;
+        --line-soft: #edf1f5;
+        --ink: #162b3a;
+        --muted: #63788b;
+        --green: #08775b;
+        --red: #b42318;
+        --amber: #9a5b08;
+        --shadow: 0 8px 24px rgba(15, 39, 61, 0.07);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: linear-gradient(180deg, #eef3f7 0, #f7f9fb 320px);
+        color: var(--ink);
+        font:
+          14px/1.5 "Segoe UI",
+          Inter,
+          Arial,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      main {
+        width: min(1180px, 100%);
+        margin: auto;
+        padding: 28px 24px 46px;
+      }
+      .apphead {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 18px;
+        padding: 31px 32px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--navy), var(--navy-2));
+        color: #fff;
+        box-shadow: 0 16px 42px rgba(10, 33, 53, 0.17);
+      }
+      .apphead:after {
+        content: "";
+        position: absolute;
+        width: 230px;
+        height: 230px;
+        right: -100px;
+        top: -130px;
+        border: 42px solid rgba(255, 255, 255, 0.055);
+        border-radius: 50%;
+      }
+      .apphead h1 {
+        position: relative;
+        z-index: 1;
+        margin: 0 0 5px;
+        font-size: clamp(25px, 4vw, 36px);
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+      }
+      .apphead .muted {
+        position: relative;
+        z-index: 1;
+        color: #b8ccda;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .auth,
+      .bar,
+      .filters,
+      .stats {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 14px 0;
+      }
+      .session {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 4px;
+        padding: 11px 14px !important;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        padding: 14px;
+        box-shadow: var(--shadow);
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 13px;
+        margin: 19px 0;
+      }
+      .stats .card {
+        position: relative;
+        min-width: 0;
+        overflow: hidden;
+        padding: 17px 18px;
+      }
+      .stats .card:after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background: #cbd7e2;
+      }
+      .stats .card:nth-child(2):after {
+        background: #2d7ee7;
+      }
+      .stats .card:nth-child(3):after {
+        background: #8b6bd6;
+      }
+      .stats .card:nth-child(4):after {
+        background: #e2a33c;
+      }
+      .stats b {
+        display: block;
+        font-size: 28px;
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+      }
+      .stats .muted {
+        font-size: 12px;
+        font-weight: 650;
+        margin-top: 2px;
+      }
+      .clickcard {
+        cursor: pointer;
+        transition: 0.15s ease;
+      }
+      .clickcard:focus,
+      .clickcard:hover {
+        border-color: #83afe5;
+        transform: translateY(-2px);
+        outline: 0;
+      }
+      .clickcard.active {
+        border-color: #4d90e5;
+        box-shadow: 0 0 0 3px rgba(23, 105, 224, 0.13);
+      }
+      .clickhint {
+        font-size: 10px;
+        color: var(--blue);
+        margin-top: 4px;
+        font-weight: 700;
+      }
+      .btn,
+      input,
+      select,
+      textarea {
+        font: inherit;
+        border: 1px solid #ccd8e3;
+        border-radius: 7px;
+        padding: 9px 10px;
+      }
+      .btn {
+        background: #fff;
+        color: #294154;
+        font-weight: 650;
+        cursor: pointer;
+        box-shadow: 0 1px 2px rgba(10, 37, 64, 0.04);
+        transition: 0.15s ease;
+      }
+      .btn:hover {
+        border-color: #aebfce;
+        background: #f8fafc;
+        transform: translateY(-1px);
+      }
+      .primary {
+        background: var(--blue);
+        border-color: var(--blue);
+        color: #fff;
+        box-shadow: 0 5px 12px rgba(23, 105, 224, 0.2);
+      }
+      .primary:hover {
+        background: var(--blue-dark);
+        border-color: var(--blue-dark);
+      }
+      input,
+      select,
+      textarea {
+        background: #fff;
+        color: var(--ink);
+        transition: 0.15s ease;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: 0;
+        border-color: #4e91e9;
+        box-shadow: 0 0 0 3px rgba(23, 105, 224, 0.1);
+      }
+      .auth {
+        align-items: center;
+      }
+      .auth input {
+        flex: 1 1 220px;
+      }
+      .hidden {
+        display: none !important;
+      }
+      .controls {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        margin: 16px 0 10px;
+      }
+      .filters {
+        flex: 1;
+        margin: 0;
+      }
+      .filters input {
+        flex: 1;
+        min-width: 230px;
+      }
+      .filters select {
+        min-width: 150px;
+      }
+      .sortbar {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        white-space: nowrap;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .sortbar label {
+        font-weight: 750;
+        text-transform: uppercase;
+        letter-spacing: 0.055em;
+      }
+      .sortbar select {
+        min-width: 190px;
+        padding: 8px 28px 8px 9px;
+      }
+      .filtermsg {
+        display: none;
+        margin: 0 0 12px;
+        padding: 10px 12px;
+        border: 1px solid #c7dcf7;
+        border-radius: 8px;
+        background: #edf5ff;
+        color: #245b91;
+      }
+      .filtermsg.show {
+        display: block;
+      }
+      .tablewrap {
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 850px;
+      }
+      td,
+      th {
+        padding: 12px;
+        border-bottom: 1px solid var(--line-soft);
+        text-align: left;
+        vertical-align: middle;
+      }
+      th {
+        background: #f7f9fb;
+        color: #687b8d;
+        font-size: 10.5px;
+        letter-spacing: 0.055em;
+        text-transform: uppercase;
+      }
+      tbody tr {
+        transition: background 0.12s ease;
+      }
+      tbody tr:hover {
+        background: #f7faff;
+      }
+      .company {
+        font-weight: 750;
+        color: #20394b;
+      }
+      .role {
+        margin-top: 2px;
+        color: #334d60;
+      }
+      .location {
+        font-size: 11px;
+        margin-top: 2px;
+      }
+      .statuspill {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: #edf2f6;
+        color: #486174;
+        font-size: 10.5px;
+        font-weight: 750;
+        white-space: nowrap;
+      }
+      .status-applied,
+      .status-follow-up {
+        background: #eaf2ff;
+        color: #175cd3;
+      }
+      .status-interview,
+      .status-phone-screen,
+      .status-second-interview {
+        background: #f1ebff;
+        color: #6941c6;
+      }
+      .status-offer {
+        background: #e8f7f0;
+        color: var(--green);
+      }
+      .status-rejected,
+      .status-withdrawn {
+        background: #fdecea;
+        color: var(--red);
+      }
+      .status-interested {
+        background: #fff3df;
+        color: var(--amber);
+      }
+      .tablelink {
+        display: inline-block;
+        margin-right: 5px;
+        padding: 4px 7px;
+        border-radius: 5px;
+        background: #eef5ff;
+        color: var(--blue);
+        font-size: 11px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .file-ref {
+        background: #f1f4f7;
+        color: #52697b;
+        cursor: help;
+      }
+      .modal {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        background: rgba(6, 18, 29, 0.72);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 14px;
+        backdrop-filter: blur(3px);
+      }
+      .modal.show {
+        display: flex;
+      }
+      .dialog {
+        width: min(780px, 100%);
+        max-height: 92vh;
+        overflow: auto;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
+      }
+      .dialog h2 {
+        margin: 0 0 17px;
+        font-size: 21px;
+        letter-spacing: -0.02em;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 13px;
+      }
+      .full {
+        grid-column: 1/-1;
+      }
+      .grid label {
+        display: block;
+        color: var(--muted);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.055em;
+        font-weight: 750;
+        margin-bottom: 5px;
+      }
+      .grid input,
+      .grid select,
+      .grid textarea {
+        width: 100%;
+      }
+      .grid textarea {
+        min-height: 105px;
+        resize: vertical;
+      }
+      .actions {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+        margin-top: 17px;
+      }
+      @media (max-width: 760px) {
+        main {
+          padding: 14px 11px 30px;
+        }
+        .apphead {
+          padding: 25px 21px;
+        }
+        .stats {
+          grid-template-columns: 1fr 1fr;
+          gap: 9px;
+        }
+        .controls {
+          display: block;
+        }
+        .filters {
+          display: grid;
+        }
+        .filters input {
+          min-width: 0;
+        }
+        .sortbar {
+          margin-top: 9px;
+        }
+        .sortbar select {
+          flex: 1;
+          min-width: 0;
+        }
+        .session {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .full {
+          grid-column: auto;
+        }
+      }
+      @media (max-width: 440px) {
+        .stats .card {
+          padding: 13px;
+        }
+        .stats b {
+          font-size: 24px;
+        }
+        .bar {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+        .bar .btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="apphead">
+        <h1>Job Application Tracker</h1>
+        <div class="muted">
+          A private workspace for applications, interviews, and follow-ups.
+        </div>
+      </header>
+      <div id="status" class="card session">Not signed in.</div>
+      <div class="bar">
+        <button id="loginToggle" class="btn">Login</button
+        ><button id="logout" class="btn hidden">Logout</button
+        ><button id="add" class="btn primary hidden">+ Add Application</button>
+      </div>
+      <div id="auth" class="auth card hidden">
+        <input id="email" type="email" placeholder="Email" /><input
+          id="password"
+          type="password"
+          placeholder="Password"
+        /><button id="signin" class="btn primary">Sign In</button
+        ><button id="signup" class="btn">Create Login</button
+        ><span id="authmsg" class="muted"></span>
+      </div>
+      <section id="app" class="hidden">
+        <div class="stats">
+          <div class="card">
+            <b id="total">0</b>
+            <div class="muted">Applications</div>
+          </div>
+          <div class="card">
+            <b id="active">0</b>
+            <div class="muted">Active</div>
+          </div>
+          <div class="card">
+            <b id="interviews">0</b>
+            <div class="muted">Interviews</div>
+          </div>
+          <div
+            id="dueCard"
+            class="card clickcard"
+            role="button"
+            tabindex="0"
+            aria-label="Show applications due for follow-up"
+          >
+            <b id="due">0</b>
+            <div class="muted">Follow-ups due</div>
+            <div class="clickhint">Tap to view</div>
+          </div>
+        </div>
+        <div id="filterMsg" class="filtermsg">
+          Showing applications due or overdue for follow-up. Tap the Follow-ups
+          due card again to show all.
+        </div>
+        <div class="controls">
+          <div class="filters">
+            <input
+              id="search"
+              placeholder="Search company, role, notes"
+              aria-label="Search applications"
+            /><select id="filter">
+              <option value="">All statuses</option>
+              <option>Interested</option>
+              <option>Applied</option>
+              <option>Follow Up</option>
+              <option>Phone Screen</option>
+              <option>Interview</option>
+              <option>Second Interview</option>
+              <option>Offer</option>
+              <option>Rejected</option>
+              <option>Withdrawn</option>
+            </select>
+          </div>
+          <div class="sortbar">
+            <label for="sort">Sort</label
+            ><select id="sort" aria-label="Sort applications">
+              <option value="applied-desc">Applied — newest first</option>
+              <option value="applied-asc">Applied — oldest first</option>
+              <option value="interest">Interest — highest first</option>
+              <option value="followup-asc">Follow-up — soonest first</option>
+              <option value="company-asc">Company — A to Z</option>
+              <option value="status">Status</option>
+            </select>
+          </div>
+        </div>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Company / Role</th>
+                <th>Status</th>
+                <th>Interest</th>
+                <th>Applied</th>
+                <th>Follow Up</th>
+                <th>Links</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <div id="modal" class="modal">
+      <div class="dialog">
+        <h2 id="mtitle">Add Application</h2>
+        <form id="form">
+          <div class="grid">
+            <div><label>Company</label><input id="company" required /></div>
+            <div><label>Job Title</label><input id="title" required /></div>
+            <div><label>Location</label><input id="location" /></div>
+            <div><label>Pay</label><input id="pay" /></div>
+            <div>
+              <label>Date Applied</label><input id="applied" type="date" />
+            </div>
+            <div>
+              <label>Status</label
+              ><select id="jobstatus">
+                <option>Interested</option>
+                <option selected="selected">Applied</option>
+                <option>Follow Up</option>
+                <option>Phone Screen</option>
+                <option>Interview</option>
+                <option>Second Interview</option>
+                <option>Offer</option>
+                <option>Rejected</option>
+                <option>Withdrawn</option>
+              </select>
+            </div>
+            <div>
+              <label>Interest Level</label
+              ><select id="interest">
+                <option>Low</option>
+                <option selected="selected">Medium</option>
+                <option>High</option>
+              </select>
+            </div>
+            <div>
+              <label>Follow Up</label><input id="followup" type="date" />
+            </div>
+            <div>
+              <label>Interview</label
+              ><input id="interview" type="datetime-local" />
+            </div>
+            <div class="full">
+              <label>Job Posting Link</label><input id="joburl" type="url" />
+            </div>
+            <div class="full">
+              <label>Resume Used — Link or File Path</label
+              ><input
+                id="resumeurl"
+                type="text"
+                placeholder="https://... or C:\Users\...\resume.docx"
+              />
+            </div>
+            <div class="full">
+              <label>Cover Letter — Link or File Path</label
+              ><input
+                id="coverletterurl"
+                type="text"
+                placeholder="https://... or C:\Users\...\cover-letter.docx"
+              />
+            </div>
+            <div><label>Contact Name</label><input id="contactname" /></div>
+            <div><label>Contact Info</label><input id="contactinfo" /></div>
+            <div class="full">
+              <label>Notes</label><textarea id="notes"></textarea>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" id="del" class="btn hidden">Delete</button
+            ><button type="button" id="cancel" class="btn">Cancel</button
+            ><button class="btn primary" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+      const sb = supabase.createClient(
+        "https://pvcgzpkkomhvfxhsnvco.supabase.co",
+        "sb_publishable_ElsfvlLztssSxhRnP5gb9Q_RyDEpb9X",
+      );
+      let user = null,
+        rows = [],
+        editing = null,
+        dueOnly = !1,
+        followupOverridden = !1,
+        currentSort = "applied-desc";
+      const $ = (e) => document.getElementById(e),
+        esc = (e) =>
+          String(e ?? "").replace(
+            /[&<>"']/g,
+            (e) =>
+              ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;",
+              })[e],
+          ),
+        slug = (e) =>
+          String(e)
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, ""),
+        closed = (e) => ["Offer", "Rejected", "Withdrawn"].includes(e),
+        savedFile = (value, label) => {
+          if (!value) return "";
+          return /^https?:\/\//i.test(value)
+            ? `<a class="tablelink" href="${esc(value)}" target="_blank" rel="noopener">${label}</a> `
+            : `<span class="tablelink file-ref" title="${esc(value)}">${label} saved</span> `;
+        },
+        today = () => new Date().toISOString().slice(0, 10),
+        addDays = (e, t) => {
+          if (!e) return "";
+          const [l, a, o] = e.split("-").map(Number),
+            s = new Date(Date.UTC(l, a - 1, o));
+          return (
+            s.setUTCDate(s.getUTCDate() + t),
+            s.toISOString().slice(0, 10)
+          );
+        },
+        defaultFollowup = () => addDays($("applied").value, 7),
+        syncFollowup = () => {
+          followupOverridden || ($("followup").value = defaultFollowup());
+        };
+      async function refresh() {
+        const { data: e } = await sb.auth.getSession();
+        ((user = e.session?.user || null),
+          user
+            ? (($("status").innerHTML = "Synced as <b>" + user.email + "</b>"),
+              $("app").classList.remove("hidden"),
+              $("add").classList.remove("hidden"),
+              $("logout").classList.remove("hidden"),
+              $("loginToggle").classList.add("hidden"),
+              $("auth").classList.add("hidden"),
+              await load())
+            : (($("status").textContent =
+                "Not signed in. Your job data requires login."),
+              $("app").classList.add("hidden"),
+              $("add").classList.add("hidden"),
+              $("logout").classList.add("hidden"),
+              $("loginToggle").classList.remove("hidden")));
+      }
+      async function load() {
+        const { data: e, error: t } = await sb
+          .from("applications")
+          .select("*")
+          .order("applied", { ascending: !1 });
+        t
+          ? ($("status").textContent = t.message)
+          : ((rows = e || []), render());
+      }
+      function compareRows(e, t) {
+        const l = (e) => (e ? Date.parse(e + "T00:00:00Z") : 0),
+          a = { High: 3, Medium: 2, Low: 1 };
+        return "applied-asc" === currentSort
+          ? l(e.applied) - l(t.applied) || e.company.localeCompare(t.company)
+          : "interest" === currentSort
+            ? (a[t.interest_level] || 0) - (a[e.interest_level] || 0) ||
+              l(t.applied) - l(e.applied)
+            : "followup-asc" === currentSort
+              ? (e.followup ? l(e.followup) : 1 / 0) -
+                  (t.followup ? l(t.followup) : 1 / 0) ||
+                l(t.applied) - l(e.applied)
+              : "company-asc" === currentSort
+                ? e.company.localeCompare(t.company) ||
+                  l(t.applied) - l(e.applied)
+                : "status" === currentSort
+                  ? e.status.localeCompare(t.status) ||
+                    l(t.applied) - l(e.applied)
+                  : l(t.applied) - l(e.applied) ||
+                    e.company.localeCompare(t.company);
+      }
+      function render() {
+        const e = $("search").value.toLowerCase(),
+          t = $("filter").value,
+          l = rows
+            .filter(
+              (l) =>
+                (!e ||
+                  [l.company, l.title, l.location, l.notes, l.interest_level]
+                    .join(" ")
+                    .toLowerCase()
+                    .includes(e)) &&
+                (!t || l.status === t) &&
+                (!dueOnly ||
+                  (l.followup && !closed(l.status) && l.followup <= today())),
+            )
+            .slice()
+            .sort(compareRows);
+        (($("tbody").innerHTML = l
+          .map(
+            (e) =>
+              `<tr><td><div class="company">${esc(e.company)}</div><div class="role">${esc(e.title)}</div><div class="muted location">${esc(e.location || "")}</div></td><td><span class="statuspill status-${slug(e.status)}">${esc(e.status)}</span></td><td>${esc(e.interest_level || "Medium")}</td><td>${esc(e.applied || "—")}</td><td>${esc(e.followup || "—")}</td><td>${e.job_url ? `<a class="tablelink" href="${esc(e.job_url)}" target="_blank" rel="noopener">Job</a> ` : ""}${savedFile(e.resume_url, "Resume")}${savedFile(e.cover_letter_url, "Cover Letter")}</td><td><button class="btn" data-edit="${esc(e.id)}">Edit</button></td></tr>`,
+          )
+          .join("")),
+          ($("total").textContent = rows.length),
+          ($("active").textContent = rows.filter(
+            (e) => !closed(e.status),
+          ).length),
+          ($("interviews").textContent = rows.filter((e) =>
+            ["Phone Screen", "Interview", "Second Interview"].includes(
+              e.status,
+            ),
+          ).length),
+          ($("due").textContent = rows.filter(
+            (e) => e.followup && !closed(e.status) && e.followup <= today(),
+          ).length),
+          $("dueCard").classList.toggle("active", dueOnly),
+          $("filterMsg").classList.toggle("show", dueOnly),
+          document
+            .querySelectorAll("[data-edit]")
+            .forEach(
+              (e) =>
+                (e.onclick = () =>
+                  open(rows.find((t) => t.id === e.dataset.edit))),
+            ));
+      }
+      function open(e = null) {
+        ((editing = e?.id || null),
+          ($("mtitle").textContent = e
+            ? "Edit Application"
+            : "Add Application"),
+          $("del").classList.toggle("hidden", !e));
+        for (const [t, l] of [
+          ["company", "company"],
+          ["title", "title"],
+          ["location", "location"],
+          ["pay", "pay"],
+          ["applied", "applied"],
+          ["jobstatus", "status"],
+          ["interest", "interest_level"],
+          ["followup", "followup"],
+          ["joburl", "job_url"],
+          ["resumeurl", "resume_url"],
+          ["coverletterurl", "cover_letter_url"],
+          ["contactname", "contact_name"],
+          ["contactinfo", "contact_info"],
+          ["notes", "notes"],
+        ])
+          $(t).value = e?.[l] || "";
+        (($("interview").value = e?.interview
+          ? String(e.interview).slice(0, 16)
+          : ""),
+          e ||
+            (($("applied").value = today()),
+            ($("jobstatus").value = "Applied"),
+            ($("interest").value = "Medium")),
+          (followupOverridden = !(
+            !e?.followup || e.followup === defaultFollowup()
+          )),
+          syncFollowup(),
+          $("modal").classList.add("show"));
+      }
+      function close() {
+        $("modal").classList.remove("show");
+      }
+      function toggleDue() {
+        ((dueOnly = !dueOnly),
+          render(),
+          dueOnly &&
+            $("filterMsg").scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+            }));
+      }
+      (($("loginToggle").onclick = () => $("auth").classList.toggle("hidden")),
+        ($("signin").onclick = async () => {
+          const { error: e } = await sb.auth.signInWithPassword({
+            email: $("email").value,
+            password: $("password").value,
+          });
+          (($("authmsg").textContent = e ? e.message : ""), e || refresh());
+        }),
+        ($("signup").onclick = async () => {
+          const { error: e } = await sb.auth.signUp({
+            email: $("email").value,
+            password: $("password").value,
+          });
+          $("authmsg").textContent = e
+            ? e.message
+            : "Account created. Check email if confirmation is required.";
+        }),
+        ($("logout").onclick = async () => {
+          (await sb.auth.signOut(), refresh());
+        }),
+        ($("add").onclick = () => open()),
+        ($("cancel").onclick = close),
+        ($("form").onsubmit = async (e) => {
+          e.preventDefault();
+          const t = {
+              user_id: user.id,
+              company: $("company").value.trim(),
+              title: $("title").value.trim(),
+              location: $("location").value.trim(),
+              pay: $("pay").value.trim(),
+              applied: $("applied").value || null,
+              status: $("jobstatus").value,
+              interest_level: $("interest").value,
+              followup: $("followup").value || null,
+              interview: $("interview").value
+                ? new Date($("interview").value).toISOString()
+                : null,
+              job_url: $("joburl").value.trim(),
+              resume_url: $("resumeurl").value.trim(),
+              cover_letter_url: $("coverletterurl").value.trim(),
+              contact_name: $("contactname").value.trim(),
+              contact_info: $("contactinfo").value.trim(),
+              notes: $("notes").value.trim(),
+            },
+            l = editing
+              ? await sb.from("applications").update(t).eq("id", editing)
+              : await sb.from("applications").insert(t);
+          l.error
+            ? ($("status").textContent = l.error.message)
+            : (close(), await load());
+        }),
+        ($("del").onclick = async () => {
+          editing &&
+            confirm("Delete this application?") &&
+            (await sb.from("applications").delete().eq("id", editing),
+            close(),
+            await load());
+        }),
+        ($("applied").oninput = syncFollowup),
+        ($("followup").oninput = () => {
+          followupOverridden = $("followup").value !== defaultFollowup();
+        }),
+        ($("search").oninput = render),
+        ($("filter").onchange = render),
+        ($("sort").onchange = (e) => {
+          ((currentSort = e.target.value), render());
+        }),
+        ($("dueCard").onclick = toggleDue),
+        ($("dueCard").onkeydown = (e) => {
+          ("Enter" !== e.key && " " !== e.key) ||
+            (e.preventDefault(), toggleDue());
+        }),
+        "serviceWorker" in navigator &&
+          navigator.serviceWorker.register("sw.js").catch(() => {}),
+        refresh());
+    </script>
+  </body>
+</html>
+

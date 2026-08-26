@@ -94,16 +94,30 @@
       ><a href="Kenneth%20Delliber%20Resume.docx" download>Résumé</a
       ><a href="projects.html">Projects</a><a href="contact.html">Contact</a>
     </div>
+    <div class="sidebar">
+      <h3>Sections</h3>
+      <ul>
+        <li><a href="#overview">Project Overview</a></li>
+        <li><a href="#project-goal">Project Goal</a></li>
+        <li><a href="#system-information">System Information</a></li>
+        <li><a href="#network-diagnostics">Network Diagnostics</a></li>
+        <li><a href="#disk-health">Disk Health</a></li>
+        <li><a href="#service-check">Service Check</a></li>
+        <li><a href="#event-errors">Event Errors</a></li>
+        <li><a href="#next-step">Practice Next Step</a></li>
+        <li><a href="projects.html">Back to Projects</a></li>
+      </ul>
+    </div>
     <main>
       <div class="container toolkit">
-        <section class="hero">
+        <section id="overview" class="hero">
           <h1>PowerShell Support Toolkit</h1>
           <p>
             A small collection of practical PowerShell scripts for workstation
             support, diagnostics, and repeatable troubleshooting.
           </p>
         </section>
-        <section class="why">
+        <section id="project-goal" class="why">
           <h2>Project Goal</h2>
           <p>
             The toolkit focuses on common support tasks that benefit from
@@ -114,7 +128,7 @@
           </p>
         </section>
         <section class="scripts">
-          <article class="card">
+          <article id="system-information" class="card">
             <h2>System Information</h2>
             <p>
               Collects computer name, logged-on user, Windows version, CPU, RAM,
@@ -128,7 +142,7 @@
               <a href="powershell/system-info.ps1">View Script</a>
             </div>
           </article>
-          <article class="card">
+          <article id="network-diagnostics" class="card">
             <h2>Network Diagnostics</h2>
             <p>
               Displays IPv4, gateway, DNS configuration, and runs basic
@@ -143,7 +157,7 @@
               <a href="powershell/network-diagnostics.ps1">View Script</a>
             </div>
           </article>
-          <article class="card">
+          <article id="disk-health" class="card">
             <h2>Disk Health</h2>
             <p>
               Reports drive capacity and flags fixed disks with less than 15%
@@ -157,7 +171,7 @@
               <a href="powershell/disk-health.ps1">View Script</a>
             </div>
           </article>
-          <article class="card">
+          <article id="service-check" class="card">
             <h2>Service Check</h2>
             <p>
               Checks several Windows services commonly relevant to DNS, DHCP,
@@ -172,7 +186,7 @@
               <a href="powershell/service-check.ps1">View Script</a>
             </div>
           </article>
-          <article class="card">
+          <article id="event-errors" class="card">
             <h2>Recent Event Errors</h2>
             <p>
               Pulls recent critical and error events from the Windows System log
@@ -187,7 +201,7 @@
             </div>
           </article>
         </section>
-        <div class="note">
+        <div id="next-step" class="note">
           <strong>Next step:</strong> run these scripts on a real Windows PC,
           review the output, and document what each result means. That turns the
           toolkit from a code sample into hands-on troubleshooting practice.
@@ -204,4 +218,5 @@
     </footer>
   </body>
 </html>
+
 

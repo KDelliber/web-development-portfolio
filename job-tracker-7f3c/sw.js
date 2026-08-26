@@ -1,19 +1,28 @@
-const C = "job-tracker-v4";
-(self.addEventListener("install", (e) =>
-  e.waitUntil(
-    caches.open(C).then((e) => e.addAll(["./", "manifest.webmanifest"])),
-  ),
-),
-  self.addEventListener("activate", (e) =>
-    e.waitUntil(
+const C = "job-tracker-v5";
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches
+      .open(C)
+      .then((cache) => cache.addAll(["./", "manifest.webmanifest"]))
+      .then(() => self.skipWaiting()),
+  );
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    Promise.all([
       caches
         .keys()
-        .then((e) =>
-          Promise.all(e.filter((e) => e !== C).map((e) => caches.delete(e))),
+        .then((keys) =>
+          Promise.all(keys.filter((key) => key !== C).map((key) => caches.delete(key))),
         ),
-    ),
-  ),
-  self.addEventListener("fetch", (e) =>
-    e.respondWith(fetch(e.request).catch(() => caches.match(e.request))),
-  ));
+      self.clients.claim(),
+    ]),
+  );
+});
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
+});
 

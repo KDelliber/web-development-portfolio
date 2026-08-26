@@ -1,1 +1,19 @@
-const C="job-tracker-v3";self.addEventListener("install",e=>e.waitUntil(caches.open(C).then(e=>e.addAll(["./","manifest.webmanifest"])))),self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(e=>Promise.all(e.filter(e=>e!==C).map(e=>caches.delete(e)))))),self.addEventListener("fetch",e=>e.respondWith(fetch(e.request).catch(()=>caches.match(e.request))));
+const C = "job-tracker-v4";
+(self.addEventListener("install", (e) =>
+  e.waitUntil(
+    caches.open(C).then((e) => e.addAll(["./", "manifest.webmanifest"])),
+  ),
+),
+  self.addEventListener("activate", (e) =>
+    e.waitUntil(
+      caches
+        .keys()
+        .then((e) =>
+          Promise.all(e.filter((e) => e !== C).map((e) => caches.delete(e))),
+        ),
+    ),
+  ),
+  self.addEventListener("fetch", (e) =>
+    e.respondWith(fetch(e.request).catch(() => caches.match(e.request))),
+  ));
+

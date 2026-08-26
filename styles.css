@@ -87,5 +87,5 @@ footer a:hover{text-decoration:underline!important}
 .project-card p{color:var(--muted);font-size:13px}
 .project-card .project-skills{margin:14px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
 .project-card .project-skills li{margin:0;padding:4px 7px;border:1px solid #e1e8ef;border-radius:5px;background:#f8fafc;color:#506779;font-size:10.5px;font-weight:600}
-.project-card .button{align-self:flex-start;margin-top:auto}
+.project-card .button{align-self:flex-start;margin-top:22px}
 @media(max-width:720px){.project-grid{grid-template-columns:1fr}.projects-intro{padding:28px 23px}.project-card{min-height:0}}

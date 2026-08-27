@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="A compact technician playbook used in the Delliber Service Desk simulated IT help desk training lab."
+    />
+    <title>Technician Playbook | Delliber Service Desk</title>
+    <style>
+      :root {
+        --navy: #0b2135;
+        --navy-2: #123a59;
+        --blue: #1769e0;
+        --blue-dark: #0f56bc;
+        --bg: #f4f7fa;
+        --surface: #fff;
+        --line: #dce4ec;
+        --ink: #162b3a;
+        --muted: #63788b;
+        --green: #067647;
+        --shadow: 0 8px 24px rgba(15, 39, 61, 0.07);
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #eef3f7, #f7f9fb 320px);
+        color: var(--ink);
+        font: 14px/1.5 "Segoe UI", Inter, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .shell { width: min(1120px, 100%); margin: auto; padding: 22px; }
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 16px;
+        padding: 22px 24px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--navy), var(--navy-2));
+        color: #fff;
+        box-shadow: 0 16px 42px rgba(10, 33, 53, 0.17);
+      }
+      .brand { display: flex; align-items: center; gap: 13px; }
+      .brandmark {
+        display: grid;
+        place-items: center;
+        flex: 0 0 42px;
+        width: 42px;
+        height: 42px;
+        border-radius: 11px;
+        background: linear-gradient(145deg, #3688f0, var(--blue));
+        font-weight: 800;
+        letter-spacing: 0.04em;
+      }
+      h1 { margin: 0; font-size: clamp(24px, 4vw, 34px); line-height: 1.15; }
+      .subtitle { margin-top: 4px; color: #c5d6e3; font-size: 12px; }
+      .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+      .btn {
+        display: inline-block;
+        padding: 9px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 7px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .btn:hover { background: rgba(255, 255, 255, 0.15); }
+      .method-note {
+        margin-bottom: 14px;
+        padding: 11px 14px;
+        border: 1px solid #c9dcf4;
+        border-left: 4px solid var(--blue);
+        border-radius: 8px;
+        background: #edf5ff;
+        color: #2d587d;
+        font-size: 12px;
+      }
+      .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+      .card {
+        padding: 17px 18px;
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+      .card.wide { grid-column: 1 / -1; }
+      .eyebrow {
+        margin-bottom: 8px;
+        color: var(--blue);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+      h2 { margin: 0 0 10px; color: var(--navy); font-size: 18px; line-height: 1.25; }
+      .flow {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+        margin: 0;
+        font-weight: 750;
+        color: #294a64;
+      }
+      .flow span {
+        padding: 6px 9px;
+        border: 1px solid #d9e5ef;
+        border-radius: 999px;
+        background: #f7fafc;
+      }
+      .arrow { color: var(--blue); font-weight: 800; }
+      .notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .note {
+        padding: 10px;
+        border-radius: 8px;
+        background: #f7f9fb;
+        border: 1px solid #e1e8ef;
+      }
+      .note strong { display: block; margin-bottom: 3px; color: var(--navy); }
+      .note span { color: var(--muted); font-size: 12px; }
+      ul { margin: 0; padding-left: 19px; }
+      li { margin: 5px 0; }
+      .verify {
+        margin-bottom: 10px;
+        padding: 10px 12px;
+        border-left: 4px solid var(--green);
+        border-radius: 7px;
+        background: #eef8f4;
+        color: #235d49;
+        font-weight: 750;
+      }
+      .examples { columns: 2; column-gap: 28px; }
+      footer { padding: 14px 2px 0; color: var(--muted); text-align: center; font-size: 11px; }
+      @media (max-width: 720px) {
+        .shell { padding: 12px; }
+        .top { display: block; padding: 18px; }
+        .actions { margin-top: 14px; }
+        .grid { grid-template-columns: 1fr; }
+        .card.wide { grid-column: auto; }
+        .notes { grid-template-columns: 1fr; }
+        .examples { columns: 1; }
+      }
+      @media print {
+        body { background: #fff; }
+        .shell { width: 100%; padding: 0; }
+        .top { color: #fff; print-color-adjust: exact; }
+        .actions { display: none; }
+        .card { box-shadow: none; break-inside: avoid; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="top">
+        <div class="brand">
+          <div class="brandmark">DS</div>
+          <div>
+            <h1>Technician Playbook</h1>
+            <div class="subtitle">Delliber Service Desk · Structured training methodology</div>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="btn" href="index.html">Service Desk</a>
+          <a class="btn" href="../help_desk.html">Portfolio Project</a>
+        </div>
+      </header>
+
+      <div class="method-note">
+        Used during a simulated IT help desk training lab—not professional employment experience. This playbook keeps troubleshooting, verification, and documentation consistent across practice tickets.
+      </div>
+
+      <div class="grid">
+        <section class="card wide">
+          <div class="eyebrow">Call Flow</div>
+          <h2>Guide the support conversation</h2>
+          <p class="flow">
+            <span>Listen</span><b class="arrow">→</b><span>Clarify</span><b class="arrow">→</b><span>Isolate</span><b class="arrow">→</b><span>Fix</span><b class="arrow">→</b><span>Verify</span><b class="arrow">→</b><span>Document</span>
+          </p>
+        </section>
+
+        <section class="card">
+          <div class="eyebrow">Ticket Notes</div>
+          <h2>Cause → Action → Result</h2>
+          <div class="notes">
+            <div class="note"><strong>Cause</strong><span>What was wrong?</span></div>
+            <div class="note"><strong>Action</strong><span>What did I do?</span></div>
+            <div class="note"><strong>Result</strong><span>Did it work, and how did I verify it?</span></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="eyebrow">Troubleshooting Flow</div>
+          <h2>Work from evidence</h2>
+          <p class="flow">
+            <span>Scope</span><b class="arrow">→</b><span>Reproduce</span><b class="arrow">→</b><span>Simplest Cause</span><b class="arrow">→</b><span>Isolate</span><b class="arrow">→</b><span>Change One Thing</span><b class="arrow">→</b><span>Retest</span>
+          </p>
+        </section>
+
+        <section class="card">
+          <div class="eyebrow">Before Escalating</div>
+          <h2>Send a complete handoff</h2>
+          <ul>
+            <li>What failed?</li>
+            <li>What still works?</li>
+            <li>What have I already tested?</li>
+            <li>What is the exact error or message?</li>
+            <li>What is the business impact or deadline?</li>
+            <li>Which team owns the issue?</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <div class="eyebrow">Verification Reminder</div>
+          <h2>Verify the user’s actual task</h2>
+          <div class="verify">Do not stop at “it works.” Verify the actual user task.</div>
+          <ul class="examples">
+            <li>Open another file</li>
+            <li>Print another document</li>
+            <li>Send and receive a test email</li>
+            <li>Reconnect to the drive</li>
+            <li>Confirm the application works normally</li>
+          </ul>
+        </section>
+      </div>
+
+      <footer>Reference for structured practice tickets in the Delliber Service Desk training environment.</footer>
+    </main>
+  </body>
+</html>
+

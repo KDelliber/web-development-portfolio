@@ -516,7 +516,7 @@
       .dialog {
         background: #fff;
         border-radius: 13px;
-        width: min(680px, 100%);
+        width: min(1040px, 100%);
         max-height: 92vh;
         overflow: auto;
         box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
@@ -529,6 +529,73 @@
       }
       .form {
         padding: 19px;
+      }
+      .create-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 300px;
+      }
+      .ticket-playbook {
+        border-left: 1px solid var(--line);
+        background: #f7faff;
+        padding: 18px;
+      }
+      .ticket-playbook details {
+        position: sticky;
+        top: 18px;
+      }
+      .ticket-playbook summary {
+        color: var(--navy-2);
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 780;
+        list-style-position: outside;
+        margin-left: 14px;
+      }
+      .playbook-label {
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 750;
+        letter-spacing: 0.06em;
+        margin: 14px 0 4px;
+        text-transform: uppercase;
+      }
+      .playbook-flow {
+        color: #234b70;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1.55;
+      }
+      .playbook-note {
+        color: #40596d;
+        font-size: 11.5px;
+        line-height: 1.45;
+      }
+      .playbook-list {
+        color: #40596d;
+        font-size: 11.5px;
+        line-height: 1.4;
+        margin: 5px 0 0;
+        padding-left: 18px;
+      }
+      .playbook-list li + li {
+        margin-top: 3px;
+      }
+      .verify-reminder {
+        background: #eaf3ff;
+        border-left: 3px solid var(--blue);
+        border-radius: 0 6px 6px 0;
+        color: #244f77;
+        font-size: 11.5px;
+        font-weight: 700;
+        margin-top: 5px;
+        padding: 8px 9px;
+      }
+      .full-playbook-link {
+        color: var(--blue-dark);
+        display: inline-block;
+        font-size: 11.5px;
+        font-weight: 700;
+        margin-top: 14px;
       }
       .formgrid {
         display: grid;
@@ -580,6 +647,18 @@
         }
       }
       @media (max-width: 760px) {
+        .create-layout {
+          grid-template-columns: 1fr;
+        }
+        .ticket-playbook {
+          border-bottom: 1px solid var(--line);
+          border-left: 0;
+          grid-row: 1;
+          padding: 13px 18px;
+        }
+        .ticket-playbook details {
+          position: static;
+        }
         .app {
           display: block;
         }
@@ -809,7 +888,8 @@
     <div class="modal" id="modal">
       <form class="dialog" id="create">
         <h2>Create ticket</h2>
-        <div class="form">
+        <div class="create-layout">
+          <div class="form">
           <div class="formgrid">
             <div>
               <label>Requester</label><input name="requester" required />
@@ -898,6 +978,51 @@
             </button>
             <button class="btn primary">Create ticket</button>
           </div>
+          </div>
+          <aside class="ticket-playbook" aria-label="Technician Playbook">
+            <details id="createPlaybook" open>
+              <summary>Technician Playbook</summary>
+              <div class="playbook-label">Call flow</div>
+              <div class="playbook-flow">
+                Listen → Clarify → Isolate → Fix → Verify → Document
+              </div>
+
+              <div class="playbook-label">Ticket notes</div>
+              <div class="playbook-flow">Cause → Action → Result</div>
+              <div class="playbook-note">
+                Cause: What was wrong?<br />
+                Action: What did I do?<br />
+                Result: What happened, and how did I verify it?
+              </div>
+
+              <div class="playbook-label">Troubleshooting</div>
+              <div class="playbook-flow">
+                Scope → Reproduce → Simplest Cause → Isolate → Change One Thing
+                → Retest
+              </div>
+
+              <div class="playbook-label">Before escalating</div>
+              <ul class="playbook-list">
+                <li>What failed, and what still works?</li>
+                <li>What have I already tested?</li>
+                <li>What is the exact error or message?</li>
+                <li>What is the impact or deadline?</li>
+                <li>Which team owns the issue?</li>
+              </ul>
+
+              <div class="playbook-label">Verification</div>
+              <div class="verify-reminder">
+                Do not stop at “it works.” Verify the actual user task.
+              </div>
+              <div class="playbook-note">
+                Test another file, print, email, drive connection, or normal app
+                use.
+              </div>
+              <a class="full-playbook-link" href="playbook.html" target="_blank" rel="noopener"
+                >Open full Playbook ↗</a
+              >
+            </details>
+          </aside>
         </div>
       </form>
     </div>
@@ -1379,6 +1504,9 @@
         var form = byId("create");
         form.reset();
         form.elements.description.value = descriptionTemplate;
+        byId("createPlaybook").open = !window.matchMedia(
+          "(max-width: 760px)",
+        ).matches;
         modal.classList.add("show");
       }
       function closeNew() {
@@ -1452,5 +1580,6 @@
     </script>
   </body>
 </html>
+
 
 

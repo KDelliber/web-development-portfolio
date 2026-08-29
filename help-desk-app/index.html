@@ -516,9 +516,11 @@
       .dialog {
         background: #fff;
         border-radius: 13px;
-        width: min(1040px, 100%);
-        max-height: 92vh;
-        overflow: auto;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        height: min(720px, 92vh);
+        overflow: hidden;
+        width: min(1080px, 100%);
         box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
       }
       .dialog h2 {
@@ -528,22 +530,27 @@
         font-size: 19px;
       }
       .form {
+        min-height: 0;
+        overflow: auto;
         padding: 19px;
       }
       .create-layout {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 300px;
+        grid-template-columns: minmax(0, 1fr) 330px;
+        min-height: 0;
+        overflow: hidden;
       }
       .ticket-playbook {
         border-left: 1px solid var(--line);
         background: #f7faff;
-        padding: 18px;
+        min-height: 0;
+        overflow: auto;
+        padding: 18px 17px 22px;
       }
       .ticket-playbook details {
-        position: sticky;
-        top: 18px;
+        position: static;
       }
-      .ticket-playbook summary {
+      #createPlaybook > summary {
         color: var(--navy-2);
         cursor: pointer;
         font-size: 15px;
@@ -551,12 +558,39 @@
         list-style-position: outside;
         margin-left: 14px;
       }
+      .playbook-subtitle {
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.4;
+        margin: 4px 0 13px;
+      }
+      .playbook-card {
+        background: #fff;
+        border: 1px solid #dce7f2;
+        border-radius: 8px;
+        box-shadow: 0 2px 7px rgba(15, 39, 61, 0.035);
+        margin-top: 9px;
+        padding: 11px 12px;
+      }
+      details.playbook-card {
+        cursor: pointer;
+      }
+      details.playbook-card > summary {
+        color: #325d82;
+        font-size: 10.5px;
+        font-weight: 780;
+        letter-spacing: 0.055em;
+        text-transform: uppercase;
+      }
+      details.playbook-card[open] > summary {
+        margin-bottom: 6px;
+      }
       .playbook-label {
         color: var(--muted);
         font-size: 10px;
         font-weight: 750;
         letter-spacing: 0.06em;
-        margin: 14px 0 4px;
+        margin: 0 0 4px;
         text-transform: uppercase;
       }
       .playbook-flow {
@@ -587,7 +621,7 @@
         color: #244f77;
         font-size: 11.5px;
         font-weight: 700;
-        margin-top: 5px;
+        margin-top: 0;
         padding: 8px 9px;
       }
       .full-playbook-link {
@@ -595,7 +629,7 @@
         display: inline-block;
         font-size: 11.5px;
         font-weight: 700;
-        margin-top: 14px;
+        margin: 14px 2px 0;
       }
       .formgrid {
         display: grid;
@@ -615,8 +649,14 @@
         resize: vertical;
       }
       .actions {
+        background: #fff;
+        border-top: 1px solid var(--line-soft);
+        bottom: -19px;
+        margin: 17px -19px -19px;
+        padding: 14px 19px 19px;
+        position: sticky;
         text-align: right;
-        margin-top: 17px;
+        z-index: 2;
       }
       .empty {
         padding: 48px 24px;
@@ -654,10 +694,27 @@
           border-bottom: 1px solid var(--line);
           border-left: 0;
           grid-row: 1;
+          overflow: visible;
           padding: 13px 18px;
         }
         .ticket-playbook details {
           position: static;
+        }
+        .dialog {
+          display: block;
+          height: auto;
+          max-height: 92vh;
+          overflow: auto;
+        }
+        .create-layout {
+          display: block;
+          overflow: visible;
+        }
+        .form {
+          overflow: visible;
+        }
+        .actions {
+          bottom: -19px;
         }
         .app {
           display: block;
@@ -982,43 +1039,61 @@
           <aside class="ticket-playbook" aria-label="Technician Playbook">
             <details id="createPlaybook" open>
               <summary>Technician Playbook</summary>
-              <div class="playbook-label">Call flow</div>
-              <div class="playbook-flow">
-                Listen → Clarify → Isolate → Fix → Verify → Document
+              <div class="playbook-subtitle">
+                Structured training methodology for consistent ticket work.
               </div>
 
-              <div class="playbook-label">Ticket notes</div>
-              <div class="playbook-flow">Cause → Action → Result</div>
-              <div class="playbook-note">
-                Cause: What was wrong?<br />
-                Action: What did I do?<br />
-                Result: What happened, and how did I verify it?
-              </div>
+              <section class="playbook-card">
+                <div class="playbook-label">Call flow</div>
+                <div class="playbook-flow">
+                  Listen → Clarify → Isolate → Fix → Verify → Document
+                </div>
+              </section>
 
-              <div class="playbook-label">Troubleshooting</div>
-              <div class="playbook-flow">
-                Scope → Reproduce → Simplest Cause → Isolate → Change One Thing
-                → Retest
-              </div>
+              <section class="playbook-card">
+                <div class="playbook-label">Ticket notes</div>
+                <div class="playbook-flow">Cause → Action → Result</div>
+                <div class="playbook-note">
+                  Cause: What was wrong?<br />
+                  Action: What did I do?<br />
+                  Result: What happened, and how did I verify it?
+                </div>
+              </section>
 
-              <div class="playbook-label">Before escalating</div>
-              <ul class="playbook-list">
-                <li>What failed, and what still works?</li>
-                <li>What have I already tested?</li>
-                <li>What is the exact error or message?</li>
-                <li>What is the impact or deadline?</li>
-                <li>Which team owns the issue?</li>
-              </ul>
+              <details class="playbook-card">
+                <summary>Troubleshooting flow</summary>
+                <div class="playbook-flow">
+                  Scope → Reproduce → Simplest Cause → Isolate → Change One
+                  Thing → Retest
+                </div>
+              </details>
 
-              <div class="playbook-label">Verification</div>
-              <div class="verify-reminder">
-                Do not stop at “it works.” Verify the actual user task.
-              </div>
-              <div class="playbook-note">
-                Test another file, print, email, drive connection, or normal app
-                use.
-              </div>
-              <a class="full-playbook-link" href="playbook.html" target="_blank" rel="noopener"
+              <details class="playbook-card">
+                <summary>Before escalating</summary>
+                <ul class="playbook-list">
+                  <li>What failed, and what still works?</li>
+                  <li>What have I already tested?</li>
+                  <li>What is the exact error or message?</li>
+                  <li>What is the impact or deadline?</li>
+                  <li>Which team owns the issue?</li>
+                </ul>
+              </details>
+
+              <section class="playbook-card">
+                <div class="playbook-label">Verification</div>
+                <div class="verify-reminder">
+                  Do not stop at “it works.” Verify the actual user task.
+                </div>
+                <div class="playbook-note">
+                  Test another file, print, email, drive connection, or normal
+                  app use.
+                </div>
+              </section>
+              <a
+                class="full-playbook-link"
+                href="playbook.html"
+                target="_blank"
+                rel="noopener"
                 >Open full Playbook ↗</a
               >
             </details>

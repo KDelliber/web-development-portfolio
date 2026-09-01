@@ -275,7 +275,7 @@
       table {
         width: 100%;
         border-collapse: collapse;
-        min-width: 850px;
+        min-width: 940px;
       }
       td,
       th {
@@ -318,6 +318,24 @@
         font-size: 10.5px;
         font-weight: 750;
         white-space: nowrap;
+      }
+      .typepill {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: #eaf2ff;
+        color: #175cd3;
+        font-size: 10.5px;
+        font-weight: 750;
+        white-space: nowrap;
+      }
+      .type-data-entry {
+        background: #e8f7f0;
+        color: var(--green);
+      }
+      .type-other {
+        background: #fff3df;
+        color: var(--amber);
       }
       .status-applied,
       .status-follow-up {
@@ -545,6 +563,12 @@
               <option>Offer</option>
               <option>Rejected</option>
               <option>Withdrawn</option>
+            </select
+            ><select id="typeFilter" aria-label="Filter by job type">
+              <option value="">All job types</option>
+              <option>IT</option>
+              <option>Data Entry</option>
+              <option>Other</option>
             </select>
           </div>
           <div class="sortbar">
@@ -564,6 +588,7 @@
             <thead>
               <tr>
                 <th>Company / Role</th>
+                <th>Job Type</th>
                 <th>Status</th>
                 <th>Interest</th>
                 <th>Applied</th>
@@ -584,6 +609,14 @@
           <div class="grid">
             <div><label>Company</label><input id="company" required /></div>
             <div><label>Job Title</label><input id="title" required /></div>
+            <div>
+              <label>Job Type</label
+              ><select id="jobtype">
+                <option selected="selected">IT</option>
+                <option>Data Entry</option>
+                <option>Other</option>
+              </select>
+            </div>
             <div><label>Location</label><input id="location" /></div>
             <div><label>Pay</label><input id="pay" /></div>
             <div>
@@ -753,15 +786,24 @@
       function render() {
         const e = $("search").value.toLowerCase(),
           t = $("filter").value,
+          jobType = $("typeFilter").value,
           l = rows
             .filter(
               (l) =>
                 (!e ||
-                  [l.company, l.title, l.location, l.notes, l.interest_level]
+                  [
+                    l.company,
+                    l.title,
+                    l.location,
+                    l.notes,
+                    l.interest_level,
+                    l.job_type || "IT",
+                  ]
                     .join(" ")
                     .toLowerCase()
                     .includes(e)) &&
                 (!t || l.status === t) &&
+                (!jobType || (l.job_type || "IT") === jobType) &&
                 (!dueOnly ||
                   (l.followup && !closed(l.status) && l.followup <= today())),
             )
@@ -770,7 +812,7 @@
         (($("tbody").innerHTML = l
           .map(
             (e) =>
-              `<tr><td><div class="company">${esc(e.company)}</div><div class="role">${esc(e.title)}</div><div class="muted location">${esc(e.location || "")}</div></td><td><span class="statuspill status-${slug(e.status)}">${esc(e.status)}</span></td><td>${esc(e.interest_level || "Medium")}</td><td>${esc(e.applied || "—")}</td><td>${esc(e.followup || "—")}</td><td>${e.job_url ? `<a class="tablelink" href="${esc(e.job_url)}" target="_blank" rel="noopener">Job</a> ` : ""}${savedFile(e.resume_url, "Resume")}${savedFile(e.cover_letter_url, "Cover Letter")}</td><td><button class="btn" data-edit="${esc(e.id)}">Edit</button></td></tr>`,
+              `<tr><td><div class="company">${esc(e.company)}</div><div class="role">${esc(e.title)}</div><div class="muted location">${esc(e.location || "")}</div></td><td><span class="typepill type-${slug(e.job_type || "IT")}">${esc(e.job_type || "IT")}</span></td><td><span class="statuspill status-${slug(e.status)}">${esc(e.status)}</span></td><td>${esc(e.interest_level || "Medium")}</td><td>${esc(e.applied || "—")}</td><td>${esc(e.followup || "—")}</td><td>${e.job_url ? `<a class="tablelink" href="${esc(e.job_url)}" target="_blank" rel="noopener">Job</a> ` : ""}${savedFile(e.resume_url, "Resume")}${savedFile(e.cover_letter_url, "Cover Letter")}</td><td><button class="btn" data-edit="${esc(e.id)}">Edit</button></td></tr>`,
           )
           .join("")),
           ($("total").textContent = rows.length),
@@ -804,6 +846,7 @@
         for (const [t, l] of [
           ["company", "company"],
           ["title", "title"],
+          ["jobtype", "job_type"],
           ["location", "location"],
           ["pay", "pay"],
           ["applied", "applied"],
@@ -823,6 +866,7 @@
           : ""),
           e ||
             (($("applied").value = today()),
+            ($("jobtype").value = "IT"),
             ($("jobstatus").value = "Applied"),
             ($("interest").value = "Medium")),
           (followupOverridden = !(
@@ -871,6 +915,7 @@
               user_id: user.id,
               company: $("company").value.trim(),
               title: $("title").value.trim(),
+              job_type: $("jobtype").value,
               location: $("location").value.trim(),
               pay: $("pay").value.trim(),
               applied: $("applied").value || null,
@@ -907,6 +952,7 @@
         }),
         ($("search").oninput = render),
         ($("filter").onchange = render),
+        ($("typeFilter").onchange = render),
         ($("sort").onchange = (e) => {
           ((currentSort = e.target.value), render());
         }),
@@ -916,9 +962,10 @@
             (e.preventDefault(), toggleDue());
         }),
         "serviceWorker" in navigator &&
-          navigator.serviceWorker.register("sw.js?v=5").catch(() => {}),
+          navigator.serviceWorker.register("sw.js?v=6").catch(() => {}),
         refresh());
     </script>
   </body>
 </html>
+
 

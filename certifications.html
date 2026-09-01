@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Certifications earned by Kenneth Delliber.">
     <meta name="keywords" content="Kenneth Delliber, certifications, IT, A+, Net+, TestOut, YTI Career Institute">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Certifications | Kenneth Delliber">
+    <meta property="og:description" content="IT certifications and technical education supporting Kenneth Delliber's hands-on portfolio.">
+    <meta property="og:url" content="https://kdelliber.github.io/web-development-portfolio/certifications.html">
+    <meta property="og:image" content="https://kdelliber.github.io/web-development-portfolio/social-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
     <title>Certifications</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
@@ -47,12 +54,14 @@
 
     <main>
         <div class="container cert-grid">
+            <h1 class="sr-only">Certifications and Education</h1>
             <section id="associates-degree" class="section">
                 <h2>Associate Degree</h2>
                 <img
-                    src="Certs/associates.jpg"
+                    src="Certs/associates.webp"
                     alt="Associate Degree from YTI Career Institute"
                     class="zoom-img small-img"
+                    decoding="async"
                 >
                 <p>
                     Computer and Data Management curriculum from YTI Career Institute
@@ -66,6 +75,7 @@
                     src="Certs/Net-plus-redacted.jpg"
                     alt="CompTIA Network+ Certification"
                     class="zoom-img small-img"
+                    loading="lazy" decoding="async"
                 >
                 <p>Validates essential networking concepts like configuration, management, and troubleshooting.</p>
                 <p>
@@ -80,6 +90,7 @@
                     src="Certs/A-plus-redacted.jpg"
                     alt="CompTIA A+ Certification"
                     class="zoom-img small-img"
+                    loading="lazy" decoding="async"
                 >
                 <p>Core certification demonstrating foundational IT knowledge and skills.</p>
                 <p>
@@ -94,6 +105,7 @@
                     src="Certs/securitypro-redacted.jpg"
                     alt="TestOut Security Pro Certification"
                     class="zoom-img small-img"
+                    loading="lazy" decoding="async"
                 >
                 <p>Validates knowledge of cybersecurity principles and best practices.</p>
             </section>
@@ -104,6 +116,7 @@
                     src="Certs/linuxpro-redacted.jpg"
                     alt="TestOut Linux Pro Certification"
                     class="zoom-img small-img"
+                    loading="lazy" decoding="async"
                 >
                 <p>Hands-on certification covering Linux installation, management, and configuration.</p>
             </section>
@@ -114,6 +127,7 @@
                     src="Certs/networkpro-redacted.jpg"
                     alt="TestOut Network Pro Certification"
                     class="zoom-img small-img"
+                    loading="lazy" decoding="async"
                 >
                 <p>Practical network skills including routing, switching, and network security.</p>
             </section>
@@ -121,9 +135,10 @@
             <section id="porter-chester" class="section">
                 <h2>Network Technologies Certificate</h2>
                 <img
-                    src="Certs/pcicert.jpg"
+                    src="Certs/pcicert.webp"
                     alt="Computer Network Technologies Certificate"
                     class="zoom-img small-img"
+                    loading="lazy" decoding="async"
                 >
                 <p>Focused training in computer networking and system maintenance.</p>
             </section>
@@ -134,6 +149,7 @@
                     src="Certs/pcpro-redacted.jpg"
                     alt="TestOut PC Pro Certification"
                     class="zoom-img small-img"
+                    loading="lazy" decoding="async"
                 >
                 <p>PC hardware, software, and troubleshooting fundamentals.</p>
             </section>
@@ -144,6 +160,7 @@
                     src="Certs/officepro-redacted.jpg"
                     alt="TestOut Office Pro Certification"
                     class="zoom-img small-img"
+                    loading="lazy" decoding="async"
                 >
                 <p>Demonstrates proficiency in Microsoft Office productivity tools.</p>
             </section>
@@ -161,7 +178,7 @@
     <!-- Modal for Zoom Functionality -->
     <div id="myModal" class="modal">
         <span class="close">&times;</span>
-        <img class="modal-content" id="imgModal">
+        <img class="modal-content" id="imgModal" alt="">
         <div id="caption"></div>
     </div>
 
@@ -178,6 +195,7 @@
                 img.addEventListener('click', () => {
                     modal.style.display = 'block';
                     modalImg.src = img.src;
+                    modalImg.alt = img.alt;
                     captionText.textContent = img.alt;
                 });
             });

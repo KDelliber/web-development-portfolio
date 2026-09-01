@@ -2,14 +2,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const nav = document.querySelector('.top-nav');
 
   if (nav) {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const projectPages = new Set(['projects.html', 'help_desk.html', 'home_network.html', 'pc-build-report.html', 'alienware_upgrade.html', 'capstone_project.html', 'games.html']);
     nav.innerHTML = `
-      <a href="index.html">Home</a>
-      <a href="about_me.html">About Me</a>
-      <a href="certifications.html">Certifications</a>
-      <a href="Kenneth%20Delliber%20Resume.docx" download>Résumé</a>
-      <a href="projects.html">Projects</a>
-      <a href="contact.html">Contact</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primaryNavLinks">Menu</button>
+      <div class="nav-links" id="primaryNavLinks">
+        <a href="index.html">Home</a>
+        <a href="about_me.html">About Me</a>
+        <a href="certifications.html">Certifications</a>
+        <a href="Kenneth%20Delliber%20Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </div>
     `;
+    nav.setAttribute('aria-label', 'Primary navigation');
+
+    const activeHref = projectPages.has(currentPage) ? 'projects.html' : currentPage;
+    nav.querySelectorAll('.nav-links a').forEach(link => {
+      if (link.getAttribute('href') === activeHref) link.setAttribute('aria-current', 'page');
+    });
+
+    const toggle = nav.querySelector('.nav-toggle');
+    const closeMenu = () => {
+      nav.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    };
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('nav-open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    nav.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        closeMenu();
+        toggle.focus();
+      }
+    });
   }
 
   const footer = document.querySelector('footer');

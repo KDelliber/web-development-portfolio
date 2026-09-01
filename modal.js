@@ -7,8 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(polishStyles);
   }
 
-  // Keep the main navigation identical across all root portfolio pages.
-  const nav = document.querySelector('.top-nav');
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   const projectPages = new Set([
     'projects.html',
@@ -19,27 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'capstone_project.html',
     'games.html'
   ]);
-
-  if (nav) {
-    nav.setAttribute('aria-label', 'Primary navigation');
-    nav.innerHTML = `
-      <a href="index.html">Home</a>
-      <a href="about_me.html">About Me</a>
-      <a href="certifications.html">Certifications</a>
-      <a href="Kenneth%20Delliber%20Resume.docx" download>Résumé</a>
-      <a href="projects.html">Projects</a>
-      <a href="contact.html">Contact</a>
-    `;
-
-    let activeHref = currentPage;
-    if (projectPages.has(currentPage)) activeHref = 'projects.html';
-
-    nav.querySelectorAll('a').forEach(link => {
-      if (link.getAttribute('href') === activeHref) {
-        link.setAttribute('aria-current', 'page');
-      }
-    });
-  }
 
   // Give every project detail page an obvious path back to the Projects hub.
   if (projectPages.has(currentPage) && currentPage !== 'projects.html') {

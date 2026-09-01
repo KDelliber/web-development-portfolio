@@ -1,4 +1,4 @@
-const C = "job-tracker-v5";
+const C = "job-tracker-v6";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -25,4 +25,5 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
 });
+
 

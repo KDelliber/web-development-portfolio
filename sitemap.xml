@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://kdelliber.github.io/web-development-portfolio/</loc><priority>1.0</priority></url>
+  <url><loc>https://kdelliber.github.io/web-development-portfolio/about_me.html</loc><priority>0.9</priority></url>
+  <url><loc>https://kdelliber.github.io/web-development-portfolio/projects.html</loc><priority>0.9</priority></url>
+  <url><loc>https://kdelliber.github.io/web-development-portfolio/certifications.html</loc><priority>0.8</priority></url>
+  <url><loc>https://kdelliber.github.io/web-development-portfolio/help_desk.html</loc><priority>0.8</priority></url>
+  <url><loc>https://kdelliber.github.io/web-development-portfolio/ad-simulator.html</loc><priority>0.8</priority></url>
+  <url><loc>https://kdelliber.github.io/web-development-portfolio/network-lab.html</loc><priority>0.8</priority></url>
+  <url><loc>https://kdelliber.github.io/web-development-portfolio/powershell-toolkit.html</loc><priority>0.8</priority></url>
+  <url><loc>https://kdelliber.github.io/web-development-portfolio/home_network.html</loc><priority>0.7</priority></url>
+  <url><loc>https://kdelliber.github.io/web-development-portfolio/alienware_upgrade.html</loc><priority>0.7</priority></url>
+  <url><loc>https://kdelliber.github.io/web-development-portfolio/pc-build-report.html</loc><priority>0.7</priority></url>
+  <url><loc>https://kdelliber.github.io/web-development-portfolio/capstone_project.html</loc><priority>0.7</priority></url>
+  <url><loc>https://kdelliber.github.io/web-development-portfolio/contact.html</loc><priority>0.6</priority></url>
+</urlset>

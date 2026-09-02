@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kdelliber.github.io/web-development-portfolio/sitemap.xml

@@ -1,6 +1,6 @@
-# Kenneth Delliber — IT Support Portfolio
+# Kenneth Delliber Jr. — IT Support Portfolio
 
-This repository contains Kenneth Delliber's professional IT support portfolio and hands-on technical projects.
+This repository contains Kenneth Delliber Jr.'s professional IT support portfolio and hands-on technical projects.
 
 The portfolio documents practical work in:
 
@@ -14,7 +14,7 @@ The portfolio documents practical work in:
 
 ## Live portfolio
 
-[View Kenneth Delliber's IT Support Portfolio](https://kdelliber.github.io/web-development-portfolio/)
+[View Kenneth Delliber Jr.'s IT Support Portfolio](https://kdelliber.github.io/web-development-portfolio/)
 
 ## Featured projects
 

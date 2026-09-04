@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <a href="index.html">Home</a>
         <a href="about_me.html">About Me</a>
         <a href="certifications.html">Certifications</a>
-        <a href="Kenneth%20Delliber%20Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+        <a href="Kenneth%20Delliber%20Jr%20Resume.pdf" target="_blank" rel="noopener">Résumé</a>
         <a href="projects.html">Projects</a>
         <a href="contact.html">Contact</a>
       </div>

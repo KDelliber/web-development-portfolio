@@ -301,6 +301,16 @@
         font-weight: 750;
         color: #20394b;
       }
+      .company-link {
+        color: #075fb8;
+        text-decoration: none;
+        text-underline-offset: 3px;
+      }
+      .company-link:hover,
+      .company-link:focus-visible {
+        color: #00458a;
+        text-decoration: underline;
+      }
       .role {
         margin-top: 2px;
         color: #334d60;
@@ -858,7 +868,7 @@
         (($("tbody").innerHTML = l
           .map(
             (e) =>
-              `<tr><td><div class="company">${esc(e.company)}</div><div class="role">${esc(e.title)}</div><div class="muted location">${esc(e.location || "")}</div></td><td><span class="typepill type-${slug(e.job_type || "IT")}">${esc(e.job_type || "IT")}</span></td><td><span class="statuspill status-${slug(e.status)}">${esc(e.status)}</span></td><td>${esc(e.interest_level || "Medium")}</td><td>${esc(e.applied || "—")}</td><td>${esc(e.followup || "—")}</td><td class="cover-cell"><input class="cover-toggle" type="checkbox" data-cover="${esc(e.id)}" ${e.cover_letter_used ? "checked" : ""} aria-label="Cover letter used for ${esc(e.company)} — ${esc(e.title)}" title="Mark whether a cover letter was used"></td><td>${e.job_url ? `<a class="tablelink" href="${esc(e.job_url)}" target="_blank" rel="noopener">Job</a> ` : ""}${savedFile(e.resume_url, "Resume")}${savedFile(e.cover_letter_url, "Cover Letter")}</td><td><button class="btn" data-edit="${esc(e.id)}">Edit</button></td></tr>`,
+              `<tr><td><div class="company">${e.job_url ? `<a class="company-link" href="${esc(e.job_url)}" target="_blank" rel="noopener noreferrer" title="Open the ${esc(e.company)} job posting">${esc(e.company)}</a>` : esc(e.company)}</div><div class="role">${esc(e.title)}</div><div class="muted location">${esc(e.location || "")}</div></td><td><span class="typepill type-${slug(e.job_type || "IT")}">${esc(e.job_type || "IT")}</span></td><td><span class="statuspill status-${slug(e.status)}">${esc(e.status)}</span></td><td>${esc(e.interest_level || "Medium")}</td><td>${esc(e.applied || "—")}</td><td>${esc(e.followup || "—")}</td><td class="cover-cell"><input class="cover-toggle" type="checkbox" data-cover="${esc(e.id)}" ${e.cover_letter_used ? "checked" : ""} aria-label="Cover letter used for ${esc(e.company)} — ${esc(e.title)}" title="Mark whether a cover letter was used"></td><td>${e.job_url ? `<a class="tablelink" href="${esc(e.job_url)}" target="_blank" rel="noopener noreferrer">Job</a> ` : ""}${savedFile(e.resume_url, "Resume")}${savedFile(e.cover_letter_url, "Cover Letter")}</td><td><button class="btn" data-edit="${esc(e.id)}">Edit</button></td></tr>`,
           )
           .join("")),
           ($("total").textContent = rows.length),

@@ -61,12 +61,12 @@ const palettes=[
 [null,'#A5F3FC','#60A5FA','#FDBA74','#FEF08A','#5EEAD4','#E879F9','#FB7185']
 ];
 const themes=[
-{name:'Deep Space',page:'#07101b',board:'#03070d',background:'radial-gradient(circle at 25% 18%,#214b78 0,transparent 24%),radial-gradient(circle at 75% 8%,#512b75 0,transparent 22%),linear-gradient(#07101b,#02050a)'},
-{name:'Fantasy Realm',page:'#11172a',board:'#070a13',background:'radial-gradient(circle at 72% 16%,#d7d5ff 0 3%,transparent 4%),linear-gradient(150deg,#17284b 0,#20183d 48%,#09121c 100%)'},
-{name:"'80s Arcade",page:'#170c2a',board:'#08020f',background:'linear-gradient(180deg,#291248 0,#121632 58%,#07111e 59%)'},
-{name:"'90s Gaming Room",page:'#15212b',board:'#060b0e',background:'radial-gradient(circle at 30% 20%,rgba(55,189,171,.28),transparent 24%),radial-gradient(circle at 75% 30%,rgba(126,89,182,.28),transparent 25%),linear-gradient(#17222c,#091016)'},
-{name:'Old Library',page:'#24180e',board:'#100a05',background:'radial-gradient(circle at 50% 8%,rgba(255,190,91,.32),transparent 25%),repeating-linear-gradient(90deg,#1b1109 0 74px,#291a0d 76px,#120b06 78px)'},
-{name:'Guitar Studio',page:'#171318',board:'#09070a',background:'radial-gradient(circle at 30% 5%,rgba(224,68,91,.3),transparent 22%),radial-gradient(circle at 70% 5%,rgba(74,113,255,.3),transparent 22%),linear-gradient(#211722,#08090d)'}
+{name:'Deep Space',page:'#07101b',board:'#03070d',image:'../assets/tetris-themes/deep-space.png'},
+{name:'Fantasy Realm',page:'#11172a',board:'#070a13',image:'../assets/tetris-themes/fantasy-realm.png'},
+{name:"'80s Arcade",page:'#170c2a',board:'#08020f',image:'../assets/tetris-themes/80s-arcade.png'},
+{name:"'90s Gaming Room",page:'#15212b',board:'#060b0e',image:'../assets/tetris-themes/90s-gaming-room.png'},
+{name:'Old Library',page:'#24180e',board:'#100a05',image:'../assets/tetris-themes/old-library.png'},
+{name:'Guitar Studio',page:'#171318',board:'#09070a',image:'../assets/tetris-themes/guitar-studio.png'}
 ];
 let board,score,totalLines,level,nextType,currentType,holdType,canHold,gameOver,lastDrop=0,pieceSerial=0,silverCount=0,goldCount=0,dropInterval=700,groundedSince=null,lockResets=0,clearAnimation=null,tetrisPopupFrames=0,themeIndex=0,rotationEffect=null,particles=[];
 const LOCK_DELAY=450,MAX_LOCK_RESETS=12;
@@ -74,7 +74,7 @@ const player={matrix:null,cornerMatrix:null,x:0,y:0,type:null,pieceId:null};
 const scoreEl=document.getElementById('score'),linesEl=document.getElementById('lines'),levelEl=document.getElementById('level'),silverEl=document.getElementById('silverCount'),goldEl=document.getElementById('goldCount'),themeBanner=document.getElementById('themeBanner'),achievementToast=document.getElementById('achievementToast'),gameOverPanel=document.getElementById('gameOverPanel'),finalStats=document.getElementById('finalStats'),fullscreenBtn=document.getElementById('fullscreenBtn'),tetrisApp=document.getElementById('tetrisApp');
 function colors(){return palettes[(level-1)%palettes.length]}function theme(){return themes[themeIndex]}
 function showThemeBanner(){themeBanner.textContent='LEVEL '+level+' · '+theme().name;themeBanner.classList.add('show');clearTimeout(showThemeBanner.timer);showThemeBanner.timer=setTimeout(()=>themeBanner.classList.remove('show'),1500)}
-function applyLevelTheme(announce=false){const nextTheme=Math.floor(totalLines/5)%themes.length,changed=nextTheme!==themeIndex;themeIndex=nextTheme;const t=theme();document.body.style.background=t.background;tetrisApp.style.background=t.background;document.body.style.backgroundColor=t.page;canvas.style.backgroundColor=t.board;holdCanvas.style.backgroundColor=t.board;nextCanvas.style.backgroundColor=t.board;if(announce&&changed)showThemeBanner()}
+function applyLevelTheme(announce=false){const nextTheme=Math.floor(totalLines/5)%themes.length,changed=nextTheme!==themeIndex;themeIndex=nextTheme;const t=theme(),scene=`linear-gradient(rgba(2,6,12,.28),rgba(2,6,12,.58)),url("${t.image}")`;for(const surface of [document.body,tetrisApp]){surface.style.backgroundColor=t.page;surface.style.backgroundImage=scene;surface.style.backgroundSize='cover';surface.style.backgroundPosition='center';surface.style.backgroundRepeat='no-repeat';surface.style.backgroundAttachment='fixed'}canvas.style.backgroundColor=t.board;holdCanvas.style.backgroundColor=t.board;nextCanvas.style.backgroundColor=t.board;if(announce&&changed)showThemeBanner()}
 function createBoard(){return Array.from({length:ROWS},()=>Array(COLS).fill(null))}
 function updateStats(){scoreEl.textContent='Score: '+score;linesEl.textContent='Lines: '+totalLines;levelEl.textContent='Level: '+level;silverEl.textContent=silverCount;goldEl.textContent=goldCount}
 function recalcLevel(){level=Math.floor(totalLines/5)+1;dropInterval=Math.max(90,700-(level-1)*45);applyLevelTheme(true)}
